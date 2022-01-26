@@ -1,8 +1,10 @@
 import './App.css';
+import Login from './components/userAuthorization/Login';
 
 function App() {
   return (
     <div className="App">
+      <Login/>
     
     </div>
   );
