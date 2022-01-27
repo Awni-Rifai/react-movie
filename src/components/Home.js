@@ -7,6 +7,8 @@ import { options } from "../courselOptions";
 export default class Home extends Component {
     
   render() {
+    console.log = console.warn = console.error = () => {};
+
     return (
         <section class="home home--bg">
         <div class="container">
