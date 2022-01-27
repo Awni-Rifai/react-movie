@@ -3,16 +3,11 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
 import * as validate from '../../validate';
 import Spinner from "../Spinner";
-
-
-
-
-
+import { loadScripts } from "../../loadScripts";
 import Error from "../Error";
-
-
-
+import './sectionBackground.css'
 export default class Register extends Component {
+ 
   state = {
     name: "",
     email: "",
@@ -20,6 +15,9 @@ export default class Register extends Component {
     error:{body:"",email:"",password:""},
     loading:false
   };
+  componentDidMount(){
+    window.scrollTo(0,0);
+  }
   renderError=(message)=>{
     
     if(message.startsWith('Email'))this.setState(prevState=>{
