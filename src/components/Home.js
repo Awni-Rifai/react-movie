@@ -44,7 +44,7 @@ export default class Home extends Component {
   }
 
   moviePrice = () => {
-    
+
   }
 
   render() {
@@ -177,7 +177,7 @@ export default class Home extends Component {
                         onClick={this.handleFilter}
                         data-value="on_the_air"
                       >
-                        CARTOONS
+                        ON THE AIR
                       </a>
                     </li>
                   </ul>
@@ -200,19 +200,20 @@ export default class Home extends Component {
 
                   {this.props.filteredMovies?.map((movie) => {
                     if (movie.overview === "") return;
-
-                    return (
-                      <Card
-                        key={movie.id}
-                        title={movie.name}
-                        image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                        category={movie.origin_country}
-                        rating={movie.vote_average}
-                        desc={movie.overview}
-                        price={this.moviePrice}
-                      />
-                    );
-                  })}
+                    if (movie.name === "Young Royals")return;
+                      return (
+                        <Card
+                          key={movie.id}
+                          title={movie.name}
+                          image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                          category={movie.origin_country}
+                          rating={movie.vote_average}
+                          desc={movie.overview}
+                          price={this.moviePrice}
+                        />
+                      );
+                  }
+                  )}
                   {/* <!-- end card --> */}
                 </div>
               </div>

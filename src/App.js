@@ -1,13 +1,13 @@
 import './App.css';
-import Login from './components/userAuthorization/Login';
 import Register from './components/userAuthorization/Register';
+import WrappedLogin from "./components/userAuthorization/WrappedLogin";
 import Home from './components/Home';
 import {Route,Routes,BrowserRouter as Router} from 'react-router-dom'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import { loadScripts } from './loadScripts';
-import { useEffect, useState } from 'react';
-import { fetchMovies } from './fetchData';
+import NotFound from "./components/NotFound";
+import SingleProduct from "./components/single-product/SingleProduct";
+import Item from "./components/Item";
 import axios from 'axios';
 
 import React, { Component } from 'react';
@@ -59,7 +59,7 @@ export default class App extends Component {
   };
   handleFilter = async (value) => {
     if(localStorage.getItem(value)){
-      let filtered = JSON.parse(localStorage.getItem(value));
+      let filtered = JSON.parse(localStorage.getItem(value)).slice(0,10);
       console.log(filtered);
       this.setState({filteredMovies: filtered})
     }else {
@@ -83,11 +83,16 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <Router>
+        
           <Navbar />
           <Routes>
-            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/login" element={<WrappedLogin />} />
             <Route exact path="/register" element={<Register />} />
+    
+            <Route path="*" element={<NotFound />} />
+
+            <Route exact path="/item" element={<Item />} />
+            <Route exact path="/movie" element={<SingleProduct />} />
             <Route
               exact
               path="/"
@@ -100,7 +105,7 @@ export default class App extends Component {
               }
             />
           </Routes>
-        </Router>
+     
         <Footer />
       </div>
     );
