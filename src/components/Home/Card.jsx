@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Card extends Component {
     state = {  } 
@@ -18,7 +19,7 @@ class Card extends Component {
 
 									<div className="col-12 col-sm-8">
 										<div className="card__content">
-											<h3 className="card__title"><a href="#">{this.props.title}</a></h3>
+											<h3 className="card__title">{this.props.title}</h3>
 											<span className="card__category">
 												<a href="#">{this.props.category}</a>
 										

@@ -48,8 +48,7 @@ export default class Home extends Component {
   }
 
   render() {
-    console.log(this.props.popularMovies);
-
+    
     return (
       <div>
         <section class="home home--bg">

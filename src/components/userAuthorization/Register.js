@@ -6,6 +6,7 @@ import Spinner from "../Spinner";
 import { loadScripts } from "../../loadScripts";
 import Error from "../Error";
 import './sectionBackground.css'
+import Helmet from "react-helmet";
 export default class Register extends Component {
  
   state = {
@@ -79,8 +80,8 @@ validateUser=()=>{
 	  e.preventDefault();
     if(this.validateUser()){
     this.registerUser(this.state.email,this.state.password);
-    window.location.href="/";
-   
+      window.location.href="/";
+    
 
     
     
@@ -95,6 +96,10 @@ validateUser=()=>{
   }
   render() {
     return (
+      <>
+      <Helmet>
+      <script  src="%PUBLIC_URL%/js/bootstrap.bundle.min.js"></script>
+      </Helmet>
       <div className="sign section--bg" data-bg="img/section/section.jpg">
         <div className="container">
           <div className="row">
@@ -169,6 +174,7 @@ validateUser=()=>{
           </div>
         </div>
       </div>
+      </>
     );
   }
 }
