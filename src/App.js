@@ -2,8 +2,11 @@ import './App.css';
 import WrappedLogin from './components/userAuthorization/WrappedLogin';
 import Register from './components/userAuthorization/Register';
 import Home from './components/Home';
-import {Route,Routes,BrowserRouter as Router} from 'react-router-dom'
+import  Item from './components/Item';
+import {Route,Routes,BrowserRouter as Router, useParams} from 'react-router-dom'
+
 import Navbar from './components/Navbar';
+import SingleProduct from './components/single-product/SingleProduct';
 import Footer from './components/Footer';
 import { loadScripts } from './loadScripts';
 import { useEffect, useState } from 'react';
@@ -58,8 +61,13 @@ export default class App extends Component {
           <Route exact path="/login" element={ <WrappedLogin/>}/>
           <Route exact path="/register" element={ <Register/>}/>
           <Route exact path="/" element={ <Home popularMovies={this.state.popularMovies}/>}/>
+<<<<<<< HEAD
           <Route path="*" element={<NotFound />} />
           
+=======
+          <Route exact path="/item" element={ <Item/>}/>
+          <Route exact path="/movie" element={ <SingleProduct/>}/>
+>>>>>>> ab701b540b4e797f0a59fbe56f24374058432b84
        
        
         </Routes>
