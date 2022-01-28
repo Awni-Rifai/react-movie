@@ -36,8 +36,21 @@ export default class Home extends Component {
       );
     });
   }
+  handleFilter = (e) =>{
+   
+    const value = e.target;
+     console.log(value.getAttribute("data-value"));
+    this.props.handleFilter(value.getAttribute('data-value'));
+   
+
+  }
+
+  moviePrice = () => {
+
+  }
 
   render() {
+    
     return (
       <div>
         <section class="home home--bg">
@@ -101,6 +114,7 @@ export default class Home extends Component {
                 <div class="col-12">
                   {/* <!-- content title --> */}
                   <h2 class="content__title">New items</h2>
+
                   {/* <!-- end content title -->
 
 						<!-- content tabs nav --> */}
@@ -117,6 +131,8 @@ export default class Home extends Component {
                         role="tab"
                         aria-controls="tab-1"
                         aria-selected="true"
+                        onClick={this.handleFilter}
+                        data-value="popular"
                       >
                         NEW RELEASES
                       </a>
@@ -130,6 +146,8 @@ export default class Home extends Component {
                         role="tab"
                         aria-controls="tab-2"
                         aria-selected="false"
+                        onClick={this.handleFilter}
+                        data-value="airing_today"
                       >
                         MOVIES
                       </a>
@@ -143,6 +161,8 @@ export default class Home extends Component {
                         role="tab"
                         aria-controls="tab-3"
                         aria-selected="false"
+                        onClick={this.handleFilter}
+                        data-value="top_rated"
                       >
                         TV SERIES
                       </a>
@@ -156,8 +176,10 @@ export default class Home extends Component {
                         role="tab"
                         aria-controls="tab-4"
                         aria-selected="false"
+                        onClick={this.handleFilter}
+                        data-value="on_the_air"
                       >
-                        CARTOONS
+                        ON THE AIR
                       </a>
                     </li>
                   </ul>
@@ -178,21 +200,23 @@ export default class Home extends Component {
                 <div class="row">
                   {/* <!-- card --> */}
 
-                  {this.props.popularMovies?.map((movie) => {
+                  {this.props.filteredMovies?.map((movie) => {
                     if (movie.overview === "") return;
-
-                    return (
-                      <Card
-                        key={movie.id}
-                        id={movie.id}
-                        title={movie.name}
-                        image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                        category={movie.origin_country}
-                        rating={movie.vote_average}
-                        desc={movie.overview}
-                      />
-                    );
-                  })}
+                    if (movie.name === "Young Royals")return;
+                      return (
+                        <Card
+                          key={movie.id}
+                          id={movie.id}
+                          title={movie.name}
+                          image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                          category={movie.origin_country}
+                          rating={movie.vote_average}
+                          desc={movie.overview}
+                          price={this.moviePrice}
+                        />
+                      );
+                  }
+                  )}
                   {/* <!-- end card --> */}
                 </div>
               </div>
@@ -216,10 +240,10 @@ export default class Home extends Component {
                     title={movie.name}
                     image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                     rating={movie.vote_average}
+                    price={this.moviePrice}
                   />
                 );
               })}
-
 
               {/* <!-- section btn --> */}
               {/* <div class="col-12">

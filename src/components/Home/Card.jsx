@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link, useParams} from 'react-router-dom'
-import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 class Card extends Component {
     state = {  } 
 	
