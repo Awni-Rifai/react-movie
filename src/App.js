@@ -61,13 +61,10 @@ export default class App extends Component {
           <Route exact path="/login" element={ <WrappedLogin/>}/>
           <Route exact path="/register" element={ <Register/>}/>
           <Route exact path="/" element={ <Home popularMovies={this.state.popularMovies}/>}/>
-<<<<<<< HEAD
           <Route path="*" element={<NotFound />} />
           
-=======
           <Route exact path="/item" element={ <Item/>}/>
           <Route exact path="/movie" element={ <SingleProduct/>}/>
->>>>>>> ab701b540b4e797f0a59fbe56f24374058432b84
        
        
         </Routes>
