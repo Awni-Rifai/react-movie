@@ -1,5 +1,5 @@
 import './App.css';
-import Login from './components/userAuthorization/Login';
+import WrappedLogin from './components/userAuthorization/WrappedLogin';
 import Register from './components/userAuthorization/Register';
 import Home from './components/Home';
 import {Route,Routes,BrowserRouter as Router} from 'react-router-dom'
@@ -9,7 +9,7 @@ import { loadScripts } from './loadScripts';
 import { useEffect, useState } from 'react';
 import { fetchMovies } from './fetchData';
 import axios from 'axios';
-
+import NotFound from './components/NotFound';
 import React, { Component } from 'react';
 
 export default class App extends Component {
@@ -46,26 +46,24 @@ export default class App extends Component {
     renderMovies=()=>{
       let movies=(JSON.parse(localStorage.getItem('popularMovies')));
       movies=movies.filter(movie=>movie.name);
-      console.log(movies);
-
       this.setState({popularMovies:movies.slice(0,10)});
       
     };
   render() {
     return (
       <div className="App">
-        <Router>
-          
+       
           <Navbar/>
           <Routes>
-          <Route exact path="/login" element={ <Login/>}/>
+          <Route exact path="/login" element={ <WrappedLogin/>}/>
           <Route exact path="/register" element={ <Register/>}/>
           <Route exact path="/" element={ <Home popularMovies={this.state.popularMovies}/>}/>
+          <Route path="*" element={<NotFound />} />
           
        
        
         </Routes>
-        </Router>
+       
         <Footer/>
         
       </div>
