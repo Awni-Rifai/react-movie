@@ -7,10 +7,36 @@ import Product from "./Home/Product";
 import Card from "./Home/Card";
 import SingleCard from "./Home/SingleCard";
 import Partner from "./Home/Partner";
+import { loadScripts } from "../loadScripts";
+import "./userAuthorization/sectionBackground.css";
+import { fetchMovies } from "../fetchData";
+
+// console.log = console.warn = console.error = () => {};
 
 export default class Home extends Component {
-    
+  state = {
+    popularMovies: [],
+  };
+  componentDidMount(){
+    window.scrollTo(0,0);
+  }
+  componentDidUpdate() {}
+  renderSlider() {
+    this.props.popularMovies?.map((movie) => {
+      return (
+        <Product
+          key={movie.id}
+          title={movie.name}
+          image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          category={movie.origin_country}
+          rating={movie.vote_average}
+        />
+      );
+    });
+  }
+
   render() {
+    console.log(this.props.popularMovies);
 
     return (
       <div>
@@ -19,7 +45,7 @@ export default class Home extends Component {
             <div class="row">
               <div class="col-12">
                 <h1 class="home__title">
-                  <b>NEW ITEMS</b> OF THIS SEASON
+                  <b>Popular</b> OF THIS SEASON
                 </h1>
               </div>
               <div className="col-12">
@@ -32,7 +58,7 @@ export default class Home extends Component {
                     nav
                     {...options}
                   >
-                    <Product
+                       <Product
                       title="I Dream in Another Language"
                       image="img/covers/cover.jpg"
                       category="Action, Triller"
@@ -151,48 +177,21 @@ export default class Home extends Component {
               >
                 <div class="row">
                   {/* <!-- card --> */}
-                  <Card
-                    title="I Dream in Another Language"
-                    image="img/covers/cover5.jpg"
-                    category="Action, Triller"
-                    rating="8.4"
-                    desc="All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum"
-                  />
-                  <Card
-                    title="Benched"
-                    image="img/covers/cover2.jpg"
-                    category="Comedy"
-                    rating="7.1"
-                    desc="All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum"
-                  />
-                  <Card
-                    title="Whitney"
-                    image="img/covers/cover3.jpg"
-                    category="Comedy,Drama,Music"
-                    rating="6.4"
-                    desc="All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum"
-                  />
-                  <Card
-                    title="Blindspotting"
-                    image="img/covers/cover4.jpg"
-                    category="Comedy, Drama"
-                    rating="7.9"
-                    desc="All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum"
-                  />
-                  <Card
-                    title="I Dream in Another Language"
-                    image="img/covers/cover5.jpg"
-                    category="Action, Triller"
-                    rating="8.4"
-                    desc="All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum"
-                  />
-                  <Card
-                    title="Benched"
-                    image="img/covers/cover6.jpg"
-                    category="Comedy"
-                    rating="7.1"
-                    desc="All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum"
-                  />
+
+                  {this.props.popularMovies?.map((movie) => {
+                    if (movie.overview === "") return;
+
+                    return (
+                      <Card
+                        key={movie.id}
+                        title={movie.name}
+                        image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                        category={movie.origin_country}
+                        rating={movie.vote_average}
+                        desc={movie.overview}
+                      />
+                    );
+                  })}
                   {/* <!-- end card --> */}
                 </div>
               </div>
@@ -207,42 +206,19 @@ export default class Home extends Component {
                 <h2 class="section__title">Expected premiere</h2>
               </div>
               {/* <!-- end section title --> */}
-              <SingleCard
-                title="I Dream in Another Language"
-                image="img/covers/cover.jpg"
-                category="Action, Triller"
-                rating="8.4"
-              />
-              <SingleCard
-                title="Benched"
-                image="img/covers/cover2.jpg"
-                category="Comedy"
-                rating="7.1"
-              />
-              <SingleCard
-                title="Whitney"
-                image="img/covers/cover3.jpg"
-                category="Action, Triller"
-                rating="8.4"
-              />
-              <SingleCard
-                title="Blindspotting"
-                image="img/covers/cover4.jpg"
-                category="Romance, Drama"
-                rating="6.3"
-              />
-              <SingleCard
-                title="I Dream in Another Language"
-                image="img/covers/cover5.jpg"
-                category="Action, Triller"
-                rating="8.4"
-              />
-              <SingleCard
-                title="Benched"
-                image="img/covers/cover6.jpg"
-                category="Comedy"
-                rating="7.1"
-              />
+               {this.props.popularMovies?.map((movie) => {
+                    if (movie.overview === "") return;
+
+                    return (
+                      <SingleCard
+                      key={movie.id}
+                      title={movie.name}
+                      image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                      rating={movie.vote_average}
+                    />
+                    );
+                  })}
+            
 
               {/* <!-- section btn --> */}
               {/* <div class="col-12">
@@ -271,7 +247,7 @@ export default class Home extends Component {
                   using.
                 </p>
               </div>
-      
+
               <Partner image="img/partners/3docean-light-background.png" />
               <Partner image="img/partners/activeden-light-background.png" />
               <Partner image="img/partners/audiojungle-light-background.png" />

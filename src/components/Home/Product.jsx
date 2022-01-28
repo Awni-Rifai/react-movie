@@ -15,7 +15,7 @@ class Product extends Component {
               </div>
               <div className="card__content">
                 <h3 className="card__title">
-                  <a href="#">{this.props.title}</a>
+                  <a href="">{this.props.title}</a>
                 </h3>
                 <span className="card__category">
                   <a href="#">{this.props.category}</a>
