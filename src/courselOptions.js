@@ -3,10 +3,10 @@ const options={
     responsiveClass: true,
     nav: true,
     dots: false,
-    autoplay: false,
+    autoplay: true,
     autoplayTimeout: 2000,
     navText: ["Prev", "Next"],
-    smartSpeed: 1000,
+    smartSpeed: 500,
     responsive: {
         0: {
             items: 1,
