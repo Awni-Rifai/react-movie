@@ -14,13 +14,15 @@ import { fetchMovies } from "../fetchData";
 // console.log = console.warn = console.error = () => {};
 
 export default class Home extends Component {
+
   state = {
     popularMovies: [],
   };
-  componentDidMount(){
-    window.scrollTo(0,0);
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
-  componentDidUpdate() {}
+  componentDidUpdate() { }
+
   renderSlider() {
     this.props.popularMovies?.map((movie) => {
       return (
@@ -36,8 +38,6 @@ export default class Home extends Component {
   }
 
   render() {
-    console.log(this.props.popularMovies);
-
     return (
       <div>
         <section class="home home--bg">
@@ -58,7 +58,7 @@ export default class Home extends Component {
                     nav
                     {...options}
                   >
-                       <Product
+                    <Product
                       title="I Dream in Another Language"
                       image="img/covers/cover.jpg"
                       category="Action, Triller"
@@ -184,6 +184,7 @@ export default class Home extends Component {
                     return (
                       <Card
                         key={movie.id}
+                        id={movie.id}
                         title={movie.name}
                         image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                         category={movie.origin_country}
@@ -206,19 +207,19 @@ export default class Home extends Component {
                 <h2 class="section__title">Expected premiere</h2>
               </div>
               {/* <!-- end section title --> */}
-               {this.props.popularMovies?.map((movie) => {
-                    if (movie.overview === "") return;
+              {this.props.popularMovies?.map((movie) => {
+                if (movie.overview === "") return;
 
-                    return (
-                      <SingleCard
-                      key={movie.id}
-                      title={movie.name}
-                      image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      rating={movie.vote_average}
-                    />
-                    );
-                  })}
-            
+                return (
+                  <SingleCard
+                    key={movie.id}
+                    title={movie.name}
+                    image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    rating={movie.vote_average}
+                  />
+                );
+              })}
+
 
               {/* <!-- section btn --> */}
               {/* <div class="col-12">
