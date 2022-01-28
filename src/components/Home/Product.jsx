@@ -26,6 +26,8 @@ class Product extends Component {
                 </span>
               </div>
             </div>
+              
+
           </div>
         );
     }

@@ -34,6 +34,18 @@ export default class Home extends Component {
       );
     });
   }
+  handleFilter = (e) =>{
+   
+    const value = e.target;
+     console.log(value.getAttribute("data-value"));
+    this.props.handleFilter(value.getAttribute('data-value'));
+   
+
+  }
+
+  moviePrice = () => {
+
+  }
 
   render() {
     
@@ -57,7 +69,7 @@ export default class Home extends Component {
                     nav
                     {...options}
                   >
-                       <Product
+                    <Product
                       title="I Dream in Another Language"
                       image="img/covers/cover.jpg"
                       category="Action, Triller"
@@ -100,6 +112,7 @@ export default class Home extends Component {
                 <div class="col-12">
                   {/* <!-- content title --> */}
                   <h2 class="content__title">New items</h2>
+
                   {/* <!-- end content title -->
 
 						<!-- content tabs nav --> */}
@@ -116,6 +129,8 @@ export default class Home extends Component {
                         role="tab"
                         aria-controls="tab-1"
                         aria-selected="true"
+                        onClick={this.handleFilter}
+                        data-value="popular"
                       >
                         NEW RELEASES
                       </a>
@@ -129,6 +144,8 @@ export default class Home extends Component {
                         role="tab"
                         aria-controls="tab-2"
                         aria-selected="false"
+                        onClick={this.handleFilter}
+                        data-value="airing_today"
                       >
                         MOVIES
                       </a>
@@ -142,6 +159,8 @@ export default class Home extends Component {
                         role="tab"
                         aria-controls="tab-3"
                         aria-selected="false"
+                        onClick={this.handleFilter}
+                        data-value="top_rated"
                       >
                         TV SERIES
                       </a>
@@ -155,8 +174,10 @@ export default class Home extends Component {
                         role="tab"
                         aria-controls="tab-4"
                         aria-selected="false"
+                        onClick={this.handleFilter}
+                        data-value="on_the_air"
                       >
-                        CARTOONS
+                        ON THE AIR
                       </a>
                     </li>
                   </ul>
@@ -177,20 +198,22 @@ export default class Home extends Component {
                 <div class="row">
                   {/* <!-- card --> */}
 
-                  {this.props.popularMovies?.map((movie) => {
+                  {this.props.filteredMovies?.map((movie) => {
                     if (movie.overview === "") return;
-
-                    return (
-                      <Card
-                        key={movie.id}
-                        title={movie.name}
-                        image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                        category={movie.origin_country}
-                        rating={movie.vote_average}
-                        desc={movie.overview}
-                      />
-                    );
-                  })}
+                    if (movie.name === "Young Royals")return;
+                      return (
+                        <Card
+                          key={movie.id}
+                          title={movie.name}
+                          image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                          category={movie.origin_country}
+                          rating={movie.vote_average}
+                          desc={movie.overview}
+                          price={this.moviePrice}
+                        />
+                      );
+                  }
+                  )}
                   {/* <!-- end card --> */}
                 </div>
               </div>
@@ -205,19 +228,19 @@ export default class Home extends Component {
                 <h2 class="section__title">Expected premiere</h2>
               </div>
               {/* <!-- end section title --> */}
-               {this.props.popularMovies?.map((movie) => {
-                    if (movie.overview === "") return;
+              {this.props.popularMovies?.map((movie) => {
+                if (movie.overview === "") return;
 
-                    return (
-                      <SingleCard
-                      key={movie.id}
-                      title={movie.name}
-                      image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      rating={movie.vote_average}
-                    />
-                    );
-                  })}
-            
+                return (
+                  <SingleCard
+                    key={movie.id}
+                    title={movie.name}
+                    image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    rating={movie.vote_average}
+                    price={this.moviePrice}
+                  />
+                );
+              })}
 
               {/* <!-- section btn --> */}
               {/* <div class="col-12">

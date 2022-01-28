@@ -80,7 +80,7 @@ validateUser=()=>{
 	  e.preventDefault();
     if(this.validateUser()){
     this.registerUser(this.state.email,this.state.password);
-      window.location.href="/";
+      
     
 
     
