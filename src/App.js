@@ -3,6 +3,7 @@ import Login from './components/userAuthorization/Login';
 import Register from './components/userAuthorization/Register';
 import Home from './components/Home';
 import {Route,Routes,BrowserRouter as Router} from 'react-router-dom'
+import SingleProduct from './components/single-product/SingleProduct';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route exact path="/login" element={ <Login/>}/>
         <Route exact path="/register" element={ <Register/>}/>
         <Route exact path="/" element={ <Home/>}/>
+        <Route exact path="/movie" element={ <SingleProduct/>}/>
         
      
      
