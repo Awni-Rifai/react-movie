@@ -11,27 +11,34 @@ import { loadScripts } from "../loadScripts";
 import "./userAuthorization/sectionBackground.css";
 import { fetchMovies } from "../fetchData";
 import { getAuth } from "firebase/auth";
+import Spinner from "./Spinner";
 
 // console.log = console.warn = console.error = () => {};
 
 export default class Home extends Component {
-
+ 
   state = {
     popularMovies: [],
+    
+  
+ 
   };
-<<<<<<< HEAD
   componentDidMount(){
+    console.log('component did mount');
+    console.log(this.props.popularMovies);
+    console.log(this.state.CarouselMovies);
+ 
     window.scrollTo(0,0);
     const auth=getAuth();
     const user = auth.currentUser;
-    console.log(user);
+   
 
-=======
-  componentDidMount() {
-    window.scrollTo(0, 0);
->>>>>>> d3967e951c06af80594d5b74a0433bf658dc7ad3
+
   }
-  componentDidUpdate() { }
+  componentDidUpdate() {
+   
+    
+   }
 
   renderSlider() {
     this.props.popularMovies?.map((movie) => {
@@ -60,6 +67,10 @@ export default class Home extends Component {
   }
 
   render() {
+    console.log('render');
+    console.log(this.props.popularMovies);
+    
+    
     
     return (
       <div>
@@ -69,11 +80,12 @@ export default class Home extends Component {
               <div class="col-12">
                 <h1 class="home__title">
                   <b>Popular</b> OF THIS SEASON
+                  <button></button>
                 </h1>
               </div>
               <div className="col-12">
                 <div className="home__carousel">
-                  <OwlCarousel
+                 {this.props.popularMovies.length>0? <OwlCarousel
                     items={5}
                     className="owl-theme"
                     loop
@@ -81,37 +93,21 @@ export default class Home extends Component {
                     nav
                     {...options}
                   >
+                   {this.props.popularMovies?.map(movie=>
+                    
                     <Product
-                      title="I Dream in Another Language"
-                      image="img/covers/cover.jpg"
-                      category="Action, Triller"
-                      rating="8.4"
-                    />
-                    <Product
-                      title="Benched"
-                      image="img/covers/cover2.jpg"
-                      category="Comedy"
-                      rating="7.1"
-                    />
-                    <Product
-                      title="Whitney"
-                      image="img/covers/cover3.jpg"
-                      category="Action, Triller"
-                      rating="8.4"
-                    />
-                    <Product
-                      title="Blindspotting"
-                      image="img/covers/cover4.jpg"
-                      category="Romance, Drama"
-                      rating="6.3"
-                    />
-                    <Product
-                      title="I Dream in Another Language"
-                      image="img/covers/cover5.jpg"
-                      category="Action, Triller"
-                      rating="8.4"
-                    />
-                  </OwlCarousel>
+                    key={Math.random()}
+                    id={movie.id}
+                    title={movie.name}
+                    image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    category={movie.origin_country}
+                    rating={movie.vote_average}
+                    desc={movie.overview}
+                    price={this.moviePrice}
+                  />
+                    )}
+                 
+                  </OwlCarousel>:<Spinner/>}
                 </div>
               </div>
             </div>

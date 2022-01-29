@@ -62,7 +62,7 @@ onAuthStateChanged(auth, (user) => {
       .catch((err) => console.log(err));
     this.setState(
       { popularMovies: data.data.results.slice(0, 10) ,
-      filteredMovies: data.data.results.slice(0, 10) 
+      filteredMovies: data.data.results.slice(0, 10),
        });
 
       localStorage.setItem('popular', JSON.stringify(this.state.popularMovies));
@@ -76,6 +76,7 @@ onAuthStateChanged(auth, (user) => {
     this.setState({
       popularMovies: movies.slice(0, 10),
       filteredMovies: movies.slice(0, 10),
+     
     });
   };
   handleFilter = async (value) => {
@@ -91,7 +92,7 @@ onAuthStateChanged(auth, (user) => {
     const data = await axios
       .get(`https://api.themoviedb.org/3/tv/${category}?api_key=${API_KEY}`)
       .catch((err) => console.log(err));
-    this.setState({ filteredMovies: data.data.results.slice(0, 10) });
+    this.setState({ filteredMovies: data.data.results.slice(0, 10)});
     console.log(data.data.results);
     localStorage.setItem(value, JSON.stringify(data.data.results.slice(0,10)));
 
@@ -122,15 +123,13 @@ onAuthStateChanged(auth, (user) => {
                   filteredMovies={this.state.filteredMovies}
                   popularMovies={this.state.popularMovies}
                   handleFilter={this.handleFilter}
+                
                 />
               }
             />
-<<<<<<< HEAD
             <Route path="/profile" element={<ProfileWrapper/>}></Route>
-=======
                         <Route exact path="/movie/:id" element={<SingleProduct />} />
 
->>>>>>> d3967e951c06af80594d5b74a0433bf658dc7ad3
           </Routes>
      
         <Footer />
