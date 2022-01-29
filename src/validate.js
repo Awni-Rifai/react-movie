@@ -6,7 +6,11 @@ export function validateEmail(email) {
 }
 
 export function validateMobile(num) {
-    return (/^[077|079|078]+[0-9]{7}$/gm).test(num)
+    
+    if(num==="" || num===0 || !num)throw new Error('Number should not be empty')
+    if(!(/^[077|079|078]+[0-9]{7}$/gm).test(num))throw new Error('Number is not valid')
+    
+  
 }
 
 export function validateCountry(country) {
@@ -14,7 +18,7 @@ export function validateCountry(country) {
 }
 
 export function validateFullName(name) {
-    return (/(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/).test(name)
+    if(name==="")throw new Error('The name should not be empty');
 
 }
 
