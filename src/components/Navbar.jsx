@@ -1,9 +1,27 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { getAuth, signOut } from "firebase/auth";
 
-class Navbar extends Component {
-  state = {};
-  render() {
+
+export default function  Navbar(props){
+  const navigate=useNavigate();
+  const logout=()=>{
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      
+      navigate('/')
+  // Sign-out successful.
+  }).catch((error) => {
+  // An error happened.
+  });
+
+
+  }
+  
+ 
+ 
+  
     return (
       <header className="header">
         <div className="header__wrap">
@@ -23,6 +41,11 @@ class Navbar extends Component {
                       </Link>
                     </li>
                     <li className="header__nav-item">
+                      <Link className="header__nav-link" to="/store">
+                        store
+                      </Link>
+                    </li>
+                  {!props.auth? <> <li className="header__nav-item">
                       <Link className="header__nav-link" to="register">
                         Register
                       </Link>
@@ -32,6 +55,8 @@ class Navbar extends Component {
                         Login
                       </Link>
                     </li>
+                    </>:<Link className="header__nav-link" to="profile">{props.username} Profile</Link>
+                    }
                   </ul>
 
                   <div className="header__auth">
@@ -68,9 +93,10 @@ class Navbar extends Component {
                       </ul>
                     </div>
 
-                    <span  className="header__sign-in">
+                    <span style={{cursor:'pointer'}}  className="header__sign-in">
                       <i className="icon ion-ios-log-in"></i>
-                      <Link  to="login"> <span>signin</span></Link>
+                      {props.auth? <span onClick={logout}>Logout</span>:  <Link  to="login"> <span>Login</span></Link>}
+                    
                     </span>
                   </div>
 
@@ -104,6 +130,6 @@ class Navbar extends Component {
       </header>
     );
   }
-}
 
-export default Navbar;
+
+

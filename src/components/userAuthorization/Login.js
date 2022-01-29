@@ -12,6 +12,9 @@ export default class Login extends Component {
   loading:false,
   error:{body:"",email:"",password:""},
   };
+  componentDidMount(){
+    window.scrollTo(0,0);
+  }
   renderError=(message)=>{
     
     if(message.startsWith('Email'))this.setState(prevState=>{
@@ -84,8 +87,9 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="sign section--bg" data-bg="img/section/section.jpg">
-        <div className="container">
+      <div  className="sign section--bg" data-bg="img/section/section.jpg">
+          {this.state.loading?<Spinner container='spinner_container' spinner_item='spinner_item' background='background'/>:''} 
+        <div style={{opacity:this.state.loading?'0.4':'1'}} className="container">
           <div className="row">
             <div className="col-12">
               <div className="sign__content">

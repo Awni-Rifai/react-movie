@@ -10,6 +10,7 @@ import Partner from "./Home/Partner";
 import { loadScripts } from "../loadScripts";
 import "./userAuthorization/sectionBackground.css";
 import { fetchMovies } from "../fetchData";
+import { getAuth } from "firebase/auth";
 
 // console.log = console.warn = console.error = () => {};
 
@@ -19,6 +20,10 @@ export default class Home extends Component {
   };
   componentDidMount(){
     window.scrollTo(0,0);
+    const auth=getAuth();
+    const user = auth.currentUser;
+    console.log(user);
+
   }
   componentDidUpdate() {}
   renderSlider() {

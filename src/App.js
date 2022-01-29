@@ -1,5 +1,5 @@
 import './App.css';
-import Register from './components/userAuthorization/Register';
+import WrappedRegister from './components/userAuthorization/WrappedRegister';
 import WrappedLogin from "./components/userAuthorization/WrappedLogin";
 import Home from './components/Home';
 import {Route,Routes,BrowserRouter as Router} from 'react-router-dom'
@@ -9,8 +9,9 @@ import NotFound from "./components/NotFound";
 import SingleProduct from "./components/single-product/SingleProduct";
 import Item from "./components/Item";
 import axios from 'axios';
-
+import { getAuth, onAuthStateChanged,updateProfile} from "firebase/auth";
 import React, { Component } from 'react';
+import ProfileWrapper from './components/userProfile/ProfileWrapper';
 
 export default class App extends Component {
   state = {
@@ -18,11 +19,29 @@ export default class App extends Component {
     filteredMovies: [],
     render: false,
     category: "popular",
+    auth:false,
+    username:''
   };
  
   
   componentDidMount() {
   window.scrollTo(0, 0);
+  const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    this.setState({auth:true})
+    
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    // ...
+    this.setState({username:user.displayName})
+  } else {
+    this.setState({auth:false})
+    // User is signed out
+    console.log('no');
+    // ...
+  }
+});
  
     //  if (this.state.filteredMovies.length > 0) return;
     if(localStorage.getItem('popular')){
@@ -84,14 +103,14 @@ export default class App extends Component {
     return (
       <div className="App">
         
-          <Navbar />
+          <Navbar username={this.state.username} auth={this.state.auth} />
           <Routes>
             <Route exact path="/login" element={<WrappedLogin />} />
-            <Route exact path="/register" element={<Register />} />
+            <Route exact path="/register" element={<WrappedRegister/>} />
     
             <Route path="*" element={<NotFound />} />
 
-            <Route exact path="/item" element={<Item />} />
+            <Route exact path="/store" element={<Item />} />
             <Route exact path="/movie" element={<SingleProduct />} />
             <Route
               exact
@@ -104,6 +123,7 @@ export default class App extends Component {
                 />
               }
             />
+            <Route path="/profile" element={<ProfileWrapper/>}></Route>
           </Routes>
      
         <Footer />

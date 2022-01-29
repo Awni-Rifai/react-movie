@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
 import { auth } from "./firebase";
 import * as validate from '../../validate';
 import Spinner from "../Spinner";
@@ -21,6 +21,7 @@ export default class Register extends Component {
   }
   renderError=(message)=>{
     
+    
     if(message.startsWith('Email'))this.setState(prevState=>{
       return {error:{...prevState.error,email:message}}
     });
@@ -38,15 +39,30 @@ export default class Register extends Component {
   
    registerUser=async(email,password)=> {
       try{
-        await createUserWithEmailAndPassword(auth,email,password);
+       const user= await createUserWithEmailAndPassword(auth,email,password);
+       updateProfile(auth.currentUser, {
+        displayName: this.state.name, photoURL: "https://example.com/jane-q-user/profile.jpg"
+      }).then(() => {
+        // Profile updated!
         this.setState({error:{body:"",email:"",password:""}})
+        this.props.navigate('/')
+        // ...
+      }).catch((error) => {
+        // An error occurred
+        // ...
+        console.log(error);
+      });
+     
+       
 
       }
 
       catch(err){
+        console.log(err);
         this.setState({loading:false});
-        const error=err.code.split('/')
-        this.renderError(error[1]);
+        const error=err.message
+        console.log(error);
+        this.renderError(error);
         
 
       }
@@ -56,6 +72,8 @@ export default class Register extends Component {
 
 validateUser=()=>{
   try{
+    validate.validateFullName(this.state.name);
+    this.setState({error:{...this.state.error,body:''}})
     //validate empty
   validate.validateEmail(this.state.email);
   //empty error if email is valid
@@ -69,6 +87,8 @@ validateUser=()=>{
 
   }
   catch(error){
+   
+
     this.setState({loading:false});
     this.renderError(error.message);
 
@@ -101,7 +121,8 @@ validateUser=()=>{
       <script  src="%PUBLIC_URL%/js/bootstrap.bundle.min.js"></script>
       </Helmet>
       <div className="sign section--bg" data-bg="img/section/section.jpg">
-        <div className="container">
+      {this.state.loading?<Spinner container='spinner_container' spinner_item='spinner_item' background='background'/>:''} 
+        <div  className="container">
           <div className="row">
             
             <div className="col-12">
@@ -113,7 +134,7 @@ validateUser=()=>{
                     <img src="img/logo.svg" alt="" />
                   </a>
 
-                  {/* <div className="sign__group">
+                   <div className="sign__group">
                     <input
                       value={this.state.name}
                       onChange={(e) => this.setState({ name: e.target.value })}
@@ -121,7 +142,7 @@ validateUser=()=>{
                       className="sign__input"
                       placeholder="Name"
                     />
-                  </div> */}
+                  </div> 
 
                   <div className="sign__group">
                     <input
@@ -160,7 +181,7 @@ validateUser=()=>{
                     Sign up
                   </button>
                 
-                 {this.state.loading? <Spinner/>:null}
+               
              
                  
 
