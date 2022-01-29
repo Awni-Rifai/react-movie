@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+
 
 class Card extends Component {
     state = {  } 
@@ -22,6 +22,10 @@ class Card extends Component {
 											<h3 className="card__title">{this.props.title}</h3>
 											<span className="card__category">
 												<a href="#">{this.props.category}</a>
+										
+											</span>
+											<span className="card__category">
+												<a href="#">{this.props.price}</a>
 										
 											</span>
 

@@ -7,9 +7,8 @@ import Product from "./Home/Product";
 import Card from "./Home/Card";
 import SingleCard from "./Home/SingleCard";
 import Partner from "./Home/Partner";
-import { loadScripts } from "../loadScripts";
 import "./userAuthorization/sectionBackground.css";
-import { fetchMovies } from "../fetchData";
+
 
 // console.log = console.warn = console.error = () => {};
 
@@ -44,7 +43,10 @@ export default class Home extends Component {
   }
 
   moviePrice = () => {
-
+    
+    if(this.props.rating < 7){
+      this.props.price = "10$";
+    }
   }
 
   render() {
@@ -110,12 +112,9 @@ export default class Home extends Component {
             <div class="container">
               <div class="row">
                 <div class="col-12">
-                  {/* <!-- content title --> */}
+          
                   <h2 class="content__title">New items</h2>
 
-                  {/* <!-- end content title -->
-
-						<!-- content tabs nav --> */}
                   <ul
                     class="nav nav-tabs content__tabs"
                     id="content__tabs"
@@ -200,6 +199,10 @@ export default class Home extends Component {
 
                   {this.props.filteredMovies?.map((movie) => {
                     if (movie.overview === "") return;
+                    if(movie.vote_average <"5"){movie.vote_count = '10$'};
+                    if(movie.vote_average <"7.5" && movie.vote_average > '5'){movie.vote_count = "15$";};
+                    if(movie.vote_average > '7.5'){movie.vote_count = "20$";};
+
                     if (movie.name === "Young Royals")return;
                       return (
                         <Card
@@ -209,7 +212,7 @@ export default class Home extends Component {
                           category={movie.origin_country}
                           rating={movie.vote_average}
                           desc={movie.overview}
-                          price={this.moviePrice}
+                          price={movie.vote_count}
                         />
                       );
                   }
