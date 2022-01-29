@@ -21,16 +21,16 @@ export default class App extends Component {
     render: false,
     category: "popular",
   };
- 
-  
+
+
   componentDidMount() {
-  window.scrollTo(0, 0);
- 
+    window.scrollTo(0, 0);
+
     //  if (this.state.filteredMovies.length > 0) return;
-    if(localStorage.getItem('popular')){
+    if (localStorage.getItem('popular')) {
       this.renderMovies();
-    }else{
-    this.fetchMovies();
+    } else {
+      this.fetchMovies();
 
     }
   }
@@ -42,12 +42,13 @@ export default class App extends Component {
       .get(`https://api.themoviedb.org/3/tv/${category}?api_key=${API_KEY}`)
       .catch((err) => console.log(err));
     this.setState(
-      { popularMovies: data.data.results.slice(0, 10) ,
-      filteredMovies: data.data.results.slice(0, 10) 
-       });
+      {
+        popularMovies: data.data.results.slice(0, 10),
+        filteredMovies: data.data.results.slice(0, 10)
+      });
 
-      localStorage.setItem('popular', JSON.stringify(this.state.popularMovies));
-   
+    localStorage.setItem('popular', JSON.stringify(this.state.popularMovies));
+
   };
 
   renderMovies = () => {
@@ -60,21 +61,21 @@ export default class App extends Component {
     });
   };
   handleFilter = async (value) => {
-    if(localStorage.getItem(value)){
-      let filtered = JSON.parse(localStorage.getItem(value)).slice(0,10);
+    if (localStorage.getItem(value)) {
+      let filtered = JSON.parse(localStorage.getItem(value)).slice(0, 10);
       console.log(filtered);
-      this.setState({filteredMovies: filtered})
-    }else {
-    const API_KEY = "9b630d54f9503a9613dd2019e5cc7417";
-    const category = value;
-    console.log(category);
-    //  if (this.state.filteredMovies.length > 0) return;
-    const data = await axios
-      .get(`https://api.themoviedb.org/3/tv/${category}?api_key=${API_KEY}`)
-      .catch((err) => console.log(err));
-    this.setState({ filteredMovies: data.data.results.slice(0, 10) });
-    console.log(data.data.results);
-    localStorage.setItem(value, JSON.stringify(data.data.results.slice(0,10)));
+      this.setState({ filteredMovies: filtered })
+    } else {
+      const API_KEY = "9b630d54f9503a9613dd2019e5cc7417";
+      const category = value;
+      console.log(category);
+      //  if (this.state.filteredMovies.length > 0) return;
+      const data = await axios
+        .get(`https://api.themoviedb.org/3/tv/${category}?api_key=${API_KEY}`)
+        .catch((err) => console.log(err));
+      this.setState({ filteredMovies: data.data.results.slice(0, 10) });
+      console.log(data.data.results);
+      localStorage.setItem(value, JSON.stringify(data.data.results.slice(0, 10)));
 
     }
 
@@ -85,31 +86,32 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        
-          <Navbar />
-          <Routes>
-            <Route exact path="/login" element={<WrappedLogin />} />
-            <Route exact path="/register" element={<Register />} />
-    
-            <Route path="*" element={<NotFound />} />
 
-            <Route exact path="/item" element={<Item />} />
-            <Route exact path="/movie" element={<SingleProduct />} />
-            <Route
-              exact
-              path="/"
-              element={
-                <Home
-                  filteredMovies={this.state.filteredMovies}
-                  popularMovies={this.state.popularMovies}
-                  handleFilter={this.handleFilter}
-                />
-              }
-            />
-                        <Route exact path="/movie/:id" element={<SingleProduct />} />
+        <Navbar />
+        <Routes>
+          <Route path="/login" element={<WrappedLogin />} />
+          <Route path="/register" element={<Register />} />
 
-          </Routes>
-     
+          <Route path="*" element={<NotFound />} />
+
+          <Route path="/item" element={<Item />} />
+          {/* <Route  path="/movie" element={<SingleProduct />} /> */}
+          <Route
+
+            path="/"
+            element={
+              <Home
+                filteredMovies={this.state.filteredMovies}
+                popularMovies={this.state.popularMovies}
+                handleFilter={this.handleFilter}
+              />
+            }
+          />
+          <Route path="/TV/:id" element={<SingleProduct />} />
+          <Route path="/movie/:movie_id" element={<SingleProduct />} />
+
+        </Routes>
+
         <Footer />
       </div>
     );

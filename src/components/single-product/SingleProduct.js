@@ -12,15 +12,21 @@ import { useNavigate } from 'react-router-dom';
 function SingleProduct() {
   const [movieInfo, setMovieInfo] = useState({})
   const [trailer, setTrailer] = useState()
+  let url=""
   // console.log("movieInfo",movieInfo);
-  let { id } = useParams();
+  let { id, movie_id } = useParams();
 
   console.log(id);
 
   const API_KEY = '9b630d54f9503a9613dd2019e5cc7417';
+  if (id) {
+       url =`https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&append_to_response=videos`
+  }else if (movie_id) {
+    url =`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${API_KEY}&append_to_response=videos`
 
+  }
   const fetchMovie = useCallback(async () => {
-    const { data } = await axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&append_to_response=videos`)
+    const { data } = await axios.get(url)
     console.log('data', data);
     
     if (data.videos && data.videos.results) {
@@ -29,7 +35,7 @@ function SingleProduct() {
     }
     // const json = await response.json()
     setMovieInfo(data)
-  }, [id])
+  }, [url])
 
   useEffect(() => {
     window.scroll(0, 0)
