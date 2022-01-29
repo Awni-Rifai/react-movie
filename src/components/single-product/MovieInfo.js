@@ -40,7 +40,7 @@ function MovieInfo(props) {
 											<ul className="card__meta">
 												<li><span>Genre:</span> <a href="#">Action</a>
 													<a href="#">Triler</a></li>
-												<li><span>Release year:</span>{props.movieInfo?.first_air_date}</li>
+												<li><span>Release year:</span>{props.movieInfo?.release_date}</li>
 												<li><span>Running time:</span> {props.movieInfo?.runtime}</li>
 												<li><span>Country:</span> <a href="#">{props.movieInfo.origin_country}</a> </li>
 											</ul>

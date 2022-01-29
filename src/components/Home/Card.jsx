@@ -12,7 +12,7 @@ class Card extends Component {
 									<div className="col-12 col-sm-4">
 										<div className="card__cover">
 											<img src={this.props.image} alt=""/>
-											<Link to={`movie/${this.props.id}`} className="card__play">
+											<Link to={`TV/${this.props.id}`} className="card__play">
 												<i className="icon ion-ios-play"></i>
 											</Link>
 										</div>
@@ -20,7 +20,7 @@ class Card extends Component {
 
 									<div className="col-12 col-sm-8">
 										<div className="card__content">
-											<h3 className="card__title"><Link to={`movie/${this.props.id}`} >{this.props.title}</Link></h3>
+											<h3 className="card__title"><Link to={`TV/${this.props.id}`} >{this.props.title}</Link></h3>
 											<span className="card__category">
 												<Link to="#">{this.props.category}</Link>
 										

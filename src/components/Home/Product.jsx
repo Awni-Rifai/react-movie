@@ -8,7 +8,7 @@ class Product extends Component {
             <div className="card card--big">
               <div className="card__cover">
                 <img src={this.props.image} alt="" />
-                <Link  to={`movie/${this.props.id}`} className="card__play">
+                <Link  to={`TV/${this.props.id}`} className="card__play">
                   <i className="icon ion-ios-play"></i>
                 </Link>
               </div>

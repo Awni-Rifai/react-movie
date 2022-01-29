@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class SingleCard extends Component {
      
@@ -9,12 +10,12 @@ class SingleCard extends Component {
 					<div className="card">
 						<div className="card__cover">
 							<img src={this.props.image} alt=""/>
-							<a href="#" className="card__play">
-								<i className="icon ion-ios-play"></i>
-							</a>
+							<Link to={`movie/${this.props.id}`} className="card__play">
+												<i className="icon ion-ios-play"></i>
+											</Link>
 						</div>
 						<div className="card__content">
-							<h3 className="card__title"><a href="#">{this.props.title}</a></h3>
+							<h3 className="card__title"><Link to={`movie/${this.props.id}`} >{this.props.title}</Link></h3>
 							<span className="card__category">
 								<a href="#">{this.props.category}</a>
 						
