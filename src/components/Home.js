@@ -15,17 +15,24 @@ import { getAuth } from "firebase/auth";
 // console.log = console.warn = console.error = () => {};
 
 export default class Home extends Component {
+
   state = {
     popularMovies: [],
   };
+<<<<<<< HEAD
   componentDidMount(){
     window.scrollTo(0,0);
     const auth=getAuth();
     const user = auth.currentUser;
     console.log(user);
 
+=======
+  componentDidMount() {
+    window.scrollTo(0, 0);
+>>>>>>> d3967e951c06af80594d5b74a0433bf658dc7ad3
   }
-  componentDidUpdate() {}
+  componentDidUpdate() { }
+
   renderSlider() {
     this.props.popularMovies?.map((movie) => {
       return (
@@ -209,6 +216,7 @@ export default class Home extends Component {
                       return (
                         <Card
                           key={movie.id}
+                          id={movie.id}
                           title={movie.name}
                           image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                           category={movie.origin_country}

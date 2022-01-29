@@ -2,12 +2,14 @@ import './App.css';
 import WrappedRegister from './components/userAuthorization/WrappedRegister';
 import WrappedLogin from "./components/userAuthorization/WrappedLogin";
 import Home from './components/Home';
-import {Route,Routes,BrowserRouter as Router} from 'react-router-dom'
+import Item from './components/Item';
+import { Route, Routes, BrowserRouter as Router, useParams } from 'react-router-dom'
+
+// import {Route,Routes,BrowserRouter as Router} from 'react-router-dom'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import NotFound from "./components/NotFound";
 import SingleProduct from "./components/single-product/SingleProduct";
-import Item from "./components/Item";
 import axios from 'axios';
 import { getAuth, onAuthStateChanged,updateProfile} from "firebase/auth";
 import React, { Component } from 'react';
@@ -123,7 +125,12 @@ onAuthStateChanged(auth, (user) => {
                 />
               }
             />
+<<<<<<< HEAD
             <Route path="/profile" element={<ProfileWrapper/>}></Route>
+=======
+                        <Route exact path="/movie/:id" element={<SingleProduct />} />
+
+>>>>>>> d3967e951c06af80594d5b74a0433bf658dc7ad3
           </Routes>
      
         <Footer />

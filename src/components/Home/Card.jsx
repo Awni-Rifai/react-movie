@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 class Card extends Component {
     state = {  } 
+	
     render() { 
         return (
             			<div className="col-6 col-sm-12 col-lg-6">
@@ -11,17 +12,17 @@ class Card extends Component {
 									<div className="col-12 col-sm-4">
 										<div className="card__cover">
 											<img src={this.props.image} alt=""/>
-											<a href="#" className="card__play">
+											<Link to={`movie/${this.props.id}`} className="card__play">
 												<i className="icon ion-ios-play"></i>
-											</a>
+											</Link>
 										</div>
 									</div>
 
 									<div className="col-12 col-sm-8">
 										<div className="card__content">
-											<h3 className="card__title">{this.props.title}</h3>
+											<h3 className="card__title"><Link to={`movie/${this.props.id}`} >{this.props.title}</Link></h3>
 											<span className="card__category">
-												<a href="#">{this.props.category}</a>
+												<Link to="#">{this.props.category}</Link>
 										
 											</span>
 
