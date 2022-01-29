@@ -1,4 +1,18 @@
+.background__spiner{
+  position: relative;
+  height: 100vh; 
+  width: 100vw;
+  background-color: rgb(43,43,49);
+}
+.display__section{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 2;
+}
 .lds-roller {
+  
   display: inline-block;
   position: relative;
   width: 80px;
@@ -81,4 +95,19 @@
   100% {
     transform: rotate(360deg);
   }
+}
+.spinner_item{
+
+}
+.spinner_container{
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 2;
+}
+.background__spiner.background{
+  height: initial;
+  
+  
 }

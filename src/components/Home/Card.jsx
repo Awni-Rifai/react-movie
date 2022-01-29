@@ -25,6 +25,10 @@ class Card extends Component {
 												<Link to="#">{this.props.category}</Link>
 										
 											</span>
+											<span className="card__category">
+												<a href="#">{this.props.price}</a>
+										
+											</span>
 
 											<div className="card__wrap">
 												<span className="card__rate"><i className="icon ion-ios-star"></i>{this.props.rating}</span>

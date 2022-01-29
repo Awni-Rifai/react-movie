@@ -44,26 +44,6 @@ function SingleProduct() {
   console.log(movieInfo);
 
 
-  // const navigate =useNavigate();
-  // useEffect(() => {
-  //   window.scroll(0,0)
-  // 	const movies = JSON.parse(localStorage.getItem("popularMovies"));
-
-  // 	console.log(movies);
-
-  // 	console.log(id);
-
-  // 		let data = movies.filter((movie) => movie.id == id)
-  // 		if (!data) {
-
-  // 			navigate("/")
-  // 		}
-  // 		console.log(data);
-  // 		setMovieInfo(data[0])
-
-
-  // }, [id])
-
 
   if (!movieInfo) {
     return (
