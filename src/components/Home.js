@@ -61,12 +61,15 @@ export default class Home extends Component {
 
   }
 
-  moviePrice = () => {
+  moviePrice = (rating) => {
     
-    if(this.props.rating < 7){
-      this.props.price = "10$";
+    if(rating <5)return 10;
+    if((rating <7.5) && rating > 5)return 15;
+    if(rating > 7.5)return 20;
+    
+
     }
-  }
+  
 
   render() {
     console.log('render');
@@ -105,7 +108,8 @@ export default class Home extends Component {
                     category={movie.origin_country}
                     rating={movie.vote_average}
                     desc={movie.overview}
-                    price={this.moviePrice}
+                    price={this.moviePrice(movie.vote_average)}
+
                   />
                     )}
                  
@@ -207,9 +211,7 @@ export default class Home extends Component {
 
                   {this.props.filteredMovies?.map((movie) => {
                     if (movie.overview === "") return;
-                    if(movie.vote_average <"5"){movie.vote_count = '10$'};
-                    if(movie.vote_average <"7.5" && movie.vote_average > '5'){movie.vote_count = "15$";};
-                    if(movie.vote_average > '7.5'){movie.vote_count = "20$";};
+                 
 
                     if (movie.name === "Young Royals")return;
                       return (
@@ -221,7 +223,7 @@ export default class Home extends Component {
                           category={movie.origin_country}
                           rating={movie.vote_average}
                           desc={movie.overview}
-                          price={movie.vote_count}
+                          price={this.moviePrice(movie.vote_average)}
                         />
                       );
                   }
@@ -250,7 +252,7 @@ export default class Home extends Component {
                     title={movie.name}
                     image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                     rating={movie.vote_average}
-                    price={this.moviePrice}
+                    price={this.moviePrice(movie.vote_average)}
                   />
                 );
               })}

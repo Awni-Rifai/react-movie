@@ -26,7 +26,7 @@ class Card extends Component {
 										
 											</span>
 											<span className="card__category">
-												<a href="#">{this.props.price}</a>
+												<a href="#">{this.props.price}$</a>
 										
 											</span>
 

@@ -124,6 +124,7 @@ onAuthStateChanged(auth, (user) => {
                   filteredMovies={this.state.filteredMovies}
                   popularMovies={this.state.popularMovies}
                   handleFilter={this.handleFilter}
+                  
                 
                 />
               }
