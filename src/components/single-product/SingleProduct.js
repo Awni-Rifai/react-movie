@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function SingleProduct() {
+function SingleProduct(props) {
   const [movieInfo, setMovieInfo] = useState({})
   const [trailer, setTrailer] = useState()
   let url=""
@@ -55,11 +55,29 @@ function SingleProduct() {
       </section>
     )
   }
+  const moviePrice = (rating) => {
 
-  return (<div>
-    <MovieInfo movieInfo={movieInfo} trailer={trailer} />
-    <MovieDesc  movieInfo={movieInfo} />
-  </div>);
+      if(rating <5)return 10;
+    if((rating <7.5) && rating > 5)return 15;
+    if(rating > 7.5)return 20;
+   
+  }
+ const addElementToCart = (cartCount) => {
+   console.log(props)
+   props.addElementToCart(cartCount);
+ };
+
+  return (
+    <div>
+      <MovieInfo
+        movieInfo={movieInfo}
+        trailer={trailer}
+        price={moviePrice(movieInfo.vote_average)}
+        addElementToCart={addElementToCart}
+      />
+      <MovieDesc />
+    </div>
+  );
 
 }
 export default SingleProduct
