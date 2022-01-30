@@ -29,9 +29,9 @@ export default class Comments extends Component {
                             <div className="comments__autor">
                                 <img className="comments__avatar" src="img/user.svg" alt="" />
                                 <span className="comments__name">John Doe</span>
-                                <span className="comments__time">30.08.2018, 17:53</span>
+                                <span className="comments__time">{(new Date(comment.created.seconds * 1000)).toString().slice(0, 25)}</span>
                             </div>
-                            <p className="comments__text">{comment?.body}</p>
+                            <p className="comments__text">{comment.body}</p>
                             <div className="comments__actions">
                                 <div className="comments__rate">
                                     <button type="button"><i className="icon ion-md-thumbs-up"></i>12</button>
@@ -39,13 +39,12 @@ export default class Comments extends Component {
                                     <button type="button">7<i className="icon ion-md-thumbs-down"></i></button>
                                 </div>
 
-                                <button type="button"><i className="icon ion-ios-share-alt"></i>Reply</button>
-                                <button type="button"><i className="icon ion-ios-quote"></i>Quote</button>
+                               
                             </div>
                         </li>
 
                     </ul>))}
-                    
+
                     <form  onSubmit={this.addCommentHandler} className="form">
                         <textarea onChange={(e) => this.setState({body: e.target.value})} id="text" value={this.state.body} name="body" className="form__textarea" placeholder="Add comment"></textarea>
                         <button  className="form__btn">Send</button>

@@ -7,10 +7,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 
 import { db } from '../userAuthorization/firebase'
-import { collection, addDoc, Timestamp, query, onSnapshot, where, getDocs } from 'firebase/firestore'
+import { collection, addDoc, Timestamp, query, onSnapshot, where, getDocs, orderBy } from 'firebase/firestore'
 
 function Content(props) {
-    // const [body, setBody] = useState("");
+    const [createComment, setCreateComment] = useState(false);
     const [comments, setComments] = useState([])
     const [commentId, setCommentId] = useState(null)
     // let comment_id = ""
@@ -18,13 +18,12 @@ function Content(props) {
     
    const addComment = async (body)=>{
 
-    console.log("hello",body);
+    console.log("start add comment",body);
     const doc = { body: body, user_id: 0, movie_id: props.movieInfo.id, created: Timestamp.now() }
     console.log(doc);
     try {
          addDoc(collection(db, 'comments'),doc).then(() =>{
-             
-            setComments([...comments,comments])
+            setCreateComment(true)
         })
         console.log("comment created");
     } catch (err) {
@@ -34,11 +33,14 @@ function Content(props) {
             useEffect(()=>{
                 console.log("useEffect");
                 if (id) {
+                    console.log("fetch started" );
                     fetchComments(id)
+                    
                 } else if (movie_id) {
                     fetchComments(movie_id)
 
                 }
+
             },[id,movie_id])
     
     console.log(commentId);
@@ -48,7 +50,7 @@ function Content(props) {
        
     }
     const fetchComments = (id)=>{
-        const q = query(collection(db, 'comments'), where('movie_id', "==", Number(id)));
+        const q = query(collection(db, 'comments') ,where('movie_id', "==", Number(id)) );
 
         onSnapshot(q, (querySnapshot) => {
             console.log(querySnapshot);
@@ -62,7 +64,21 @@ function Content(props) {
                 console.log('doc',doc.data());
                 results.push({ ...doc.data(), id: doc.id })
             })
-            setComments(results)
+            console.log("results",results);
+            function compare( a, b ) {
+                if ( a.created < b.created ){
+                  return -1;
+                }
+                if ( a.created > b.created ){
+                  return 1;
+                }
+                return 0;
+              }
+              
+            
+              
+            setComments(results.sort( compare ))
+            setCreateComment(false)
         })
     }
 
