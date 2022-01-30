@@ -14,6 +14,7 @@ import axios from 'axios';
 import { getAuth, onAuthStateChanged,updateProfile} from "firebase/auth";
 import React, { Component } from 'react';
 import ProfileWrapper from './components/userProfile/ProfileWrapper';
+import { saveINDatabase } from './order';
 
 export default class App extends Component {
   state = {
@@ -22,16 +23,19 @@ export default class App extends Component {
     render: false,
     category: "popular",
     auth:false,
-    username:''
+    username:'',
+    
   };
  
   
   componentDidMount() {
   window.scrollTo(0, 0);
+  
   const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
   if (user) {
     this.setState({auth:true})
+   
     
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
@@ -41,7 +45,7 @@ onAuthStateChanged(auth, (user) => {
     this.setState({auth:false})
     // User is signed out
     console.log('no');
-    // ...
+    // <div className=""></div>
   }
 });
  
@@ -66,7 +70,11 @@ onAuthStateChanged(auth, (user) => {
        });
 
       localStorage.setItem('popular', JSON.stringify(this.state.popularMovies));
+      
+     
+
    
+
   };
 
   renderMovies = () => {

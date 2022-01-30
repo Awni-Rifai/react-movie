@@ -2,18 +2,31 @@ import React, { Component } from "react";
 import { auth } from "./firebase";
 import * as validate from '../../validate';
 import Spinner from "../Spinner";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword,onAuthStateChanged } from "firebase/auth";
 import Error from "../Error";
 
 export default class Login extends Component {
   state = {
-    email: "",
+  email: "",
 	password:'',
   loading:false,
   error:{body:"",email:"",password:""},
+  
   };
   componentDidMount(){
     window.scrollTo(0,0);
+    // redirect user if logged in
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.props.navigate('/')
+        
+      }
+      else{
+        this.setState({showForm:true})
+      }
+       
+
+    });
   }
   renderError=(message)=>{
     
@@ -87,7 +100,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div  className="sign section--bg" data-bg="img/section/section.jpg">
+      <div   className="sign section--bg" data-bg="img/section/section.jpg">
           {this.state.loading?<Spinner container='spinner_container' spinner_item='spinner_item' background='background'/>:''} 
         <div style={{opacity:this.state.loading?'0.4':'1'}} className="container">
           <div className="row">
@@ -134,7 +147,7 @@ export default class Login extends Component {
                   </button>
                   <Error error={this.state.error.password}/>
                   <Error error={this.state.error.body}/>
-                  {this.state.loading? <Spinner/>:null}
+                  
 
                   <span className="sign__text">
                     Don't have an account? <a href="signup.html">Sign up!</a>

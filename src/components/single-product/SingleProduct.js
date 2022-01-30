@@ -70,7 +70,7 @@ function SingleProduct() {
 
   return (<div>
     <MovieInfo movieInfo={movieInfo} trailer={trailer} />
-    <MovieDesc />
+    <MovieDesc  />
   </div>);
 
 }

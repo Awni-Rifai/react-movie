@@ -7,6 +7,7 @@ import { loadScripts } from "../../loadScripts";
 import Error from "../Error";
 import './sectionBackground.css'
 import Helmet from "react-helmet";
+import { getFromDatabase } from "../../order";
 export default class Register extends Component {
  
   state = {
@@ -18,6 +19,7 @@ export default class Register extends Component {
   };
   componentDidMount(){
     window.scrollTo(0,0);
+    // getFromDatabase();
   }
   renderError=(message)=>{
     
@@ -118,7 +120,7 @@ validateUser=()=>{
     return (
       <>
       <Helmet>
-      <script  src="%PUBLIC_URL%/js/bootstrap.bundle.min.js"></script>
+      <script defer  src="%PUBLIC_URL%/js/bootstrap.bundle.min.js"></script>
       </Helmet>
       <div className="sign section--bg" data-bg="img/section/section.jpg">
       {this.state.loading?<Spinner container='spinner_container' spinner_item='spinner_item' background='background'/>:''} 
