@@ -14,6 +14,7 @@ import axios from 'axios';
 import { getAuth, onAuthStateChanged,updateProfile} from "firebase/auth";
 import React, { Component } from 'react';
 import ProfileWrapper from './components/userProfile/ProfileWrapper';
+import Cart from './components/Cart/Cart';
 
 export default class App extends Component {
   state = {
@@ -21,36 +22,41 @@ export default class App extends Component {
     filteredMovies: [],
     render: false,
     category: "popular",
-    auth:false,
-    username:''
+    auth: false,
+    username: "",
+    cartCount: 0,
   };
 
-
   componentDidMount() {
-  window.scrollTo(0, 0);
-  const auth = getAuth();
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    this.setState({auth:true})
-    
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    // ...
-    this.setState({username:user.displayName})
-  } else {
-    this.setState({auth:false})
-    // User is signed out
-    console.log('no');
-    // ...
-  }
-});
- 
+    window.scrollTo(0, 0);
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.setState({ auth: true });
+
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        // ...
+        this.setState({ username: user.displayName });
+      } else {
+        this.setState({ auth: false });
+        // User is signed out
+        console.log("no");
+        // ...
+      }
+
+      this.setState({
+        cartCount: JSON.parse(localStorage.getItem("cart"))?.length,
+      });
+
+      console.log(this.state.cartCount);
+    });
+
     //  if (this.state.filteredMovies.length > 0) return;
-    if (localStorage.getItem('popular')) {
+    if (localStorage.getItem("popular")) {
       this.renderMovies();
     } else {
       this.fetchMovies();
-
     }
   }
   fetchMovies = async () => {
@@ -60,14 +66,12 @@ onAuthStateChanged(auth, (user) => {
     const data = await axios
       .get(`https://api.themoviedb.org/3/tv/${category}?api_key=${API_KEY}`)
       .catch((err) => console.log(err));
-    this.setState(
-      {
-        popularMovies: data.data.results.slice(0, 10),
-        filteredMovies: data.data.results.slice(0, 10)
-      });
+    this.setState({
+      popularMovies: data.data.results.slice(0, 10),
+      filteredMovies: data.data.results.slice(0, 10),
+    });
 
-    localStorage.setItem('popular', JSON.stringify(this.state.popularMovies));
-
+    localStorage.setItem("popular", JSON.stringify(this.state.popularMovies));
   };
 
   renderMovies = () => {
@@ -77,64 +81,81 @@ onAuthStateChanged(auth, (user) => {
     this.setState({
       popularMovies: movies.slice(0, 10),
       filteredMovies: movies.slice(0, 10),
-     
     });
   };
   handleFilter = async (value) => {
     if (localStorage.getItem(value)) {
       let filtered = JSON.parse(localStorage.getItem(value)).slice(0, 10);
       console.log(filtered);
-      this.setState({filteredMovies: filtered})
-    }else {
-    const API_KEY = "9b630d54f9503a9613dd2019e5cc7417";
-    const category = value;
-    console.log(category);
-    //  if (this.state.filteredMovies.length > 0) return;
-    const data = await axios
-      .get(`https://api.themoviedb.org/3/tv/${category}?api_key=${API_KEY}`)
-      .catch((err) => console.log(err));
-    this.setState({ filteredMovies: data.data.results.slice(0, 10)});
-    console.log(data.data.results);
-    localStorage.setItem(value, JSON.stringify(data.data.results.slice(0,10)));
-
+      this.setState({ filteredMovies: filtered });
+    } else {
+      const API_KEY = "9b630d54f9503a9613dd2019e5cc7417";
+      const category = value;
+      console.log(category);
+      //  if (this.state.filteredMovies.length > 0) return;
+      const data = await axios
+        .get(`https://api.themoviedb.org/3/tv/${category}?api_key=${API_KEY}`)
+        .catch((err) => console.log(err));
+      this.setState({ filteredMovies: data.data.results.slice(0, 10) });
+      console.log(data.data.results);
+      localStorage.setItem(
+        value,
+        JSON.stringify(data.data.results.slice(0, 10))
+      );
     }
-
   };
+  addElementToCart = (cartCount) =>{
+    this.setState({cartCount: cartCount})
+  }
+  deleteElement=(count)=>{
+    this.setState({cartCount:count})
+  }
 
   // this.fetchMovies();
 
   render() {
     return (
       <div className="App">
-        
-          <Navbar username={this.state.username} auth={this.state.auth} />
-          <Routes>
-            <Route exact path="/login" element={<WrappedLogin />} />
-            <Route exact path="/register" element={<WrappedRegister/>} />
-    
-            <Route path="*" element={<NotFound />} />
+        <Navbar
+          username={this.state.username}
+          auth={this.state.auth}
+          cartCount={this.state.cartCount}
+        />
+        <Routes>
+          <Route exact path="/login" element={<WrappedLogin />} />
+          <Route exact path="/register" element={<WrappedRegister />} />
 
-            <Route exact path="/store" element={<Item />} />
-            <Route exact path="/movie" element={<SingleProduct />} />
-            <Route
-              exact
-              path="/"
-              element={
-                <Home
-                  filteredMovies={this.state.filteredMovies}
-                  popularMovies={this.state.popularMovies}
-                  handleFilter={this.handleFilter}
-                  
-                
-                />
-              }
-            />
-            <Route path="/profile" element={<ProfileWrapper/>}></Route>
-            <Route path="/TV/:id" element={<SingleProduct />} />
-          <Route path="/movie/:movie_id" element={<SingleProduct />} />
+          <Route path="*" element={<NotFound />} />
 
-          </Routes>
-     
+          <Route exact path="/store" element={<Item />} />
+          <Route
+            exact
+            path="/movie"
+            element={<SingleProduct addElementToCart={this.addElementToCart} />}
+          />
+          <Route exact path="/cart" element={<Cart deleteElement={this.deleteElement} />} />
+          <Route
+            exact
+            path="/"
+            element={
+              <Home
+                filteredMovies={this.state.filteredMovies}
+                popularMovies={this.state.popularMovies}
+                handleFilter={this.handleFilter}
+              />
+            }
+          />
+          <Route path="/profile" element={<ProfileWrapper />}></Route>
+          <Route
+            path="/TV/:id"
+            element={<SingleProduct addElementToCart={this.addElementToCart} />}
+          />
+          <Route
+            path="/movie/:movie_id"
+            element={<SingleProduct addElementToCart={this.addElementToCart} />}
+          />
+        </Routes>
+
         <Footer />
       </div>
     );

@@ -24,9 +24,9 @@ export default function  Navbar(props){
   
     return (
       <header className="header">
-        <div className="header__wrap">
-          <div className="container">
-            <div className="row">
+        <div className="header__wrap">        
+          <div className="container">       
+            <div className="row"> 
               <div className="col-12">
                 <div className="header__content">
                   <Link className="header__nav-link" to="/">
@@ -58,11 +58,16 @@ export default function  Navbar(props){
                     </>:<Link className="header__nav-link" to="profile">{props.username} Profile</Link>
                     }
                   </ul>
+                            
 
+                  
                   <div className="header__auth">
                     <button className="header__search-btn" type="button">
                       <i className="icon ion-ios-search"></i>
                     </button>
+  
+
+                   
 
                     <div className="dropdown header__lang">
                       <a
@@ -98,7 +103,14 @@ export default function  Navbar(props){
                       {props.auth? <span onClick={logout}>Logout</span>:  <Link  to="login"> <span>Login</span></Link>}
                     
                     </span>
+                   
                   </div>
+    <div className="header__cart">
+                      <button className="header__cart-btn" type="">
+                      <Link to='/cart' className="ion-ios-cart"><i></i></Link>
+                    </button>
+                    <span className="cartNum">{props.cartCount}</span>
+                            </div>  
 
                   <button className="header__btn" type="button">
                     <span></span>
@@ -106,6 +118,7 @@ export default function  Navbar(props){
                     <span></span>
                   </button>
                 </div>
+                
               </div>
             </div>
           </div>
@@ -122,6 +135,7 @@ export default function  Navbar(props){
                   />
 
                   <button type="button">search</button>
+
                 </div>
               </div>
             </div>
