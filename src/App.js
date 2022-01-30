@@ -26,8 +26,8 @@ export default class App extends Component {
     username:'',
     
   };
- 
-  
+
+
   componentDidMount() {
   window.scrollTo(0, 0);
   
@@ -50,10 +50,10 @@ onAuthStateChanged(auth, (user) => {
 });
  
     //  if (this.state.filteredMovies.length > 0) return;
-    if(localStorage.getItem('popular')){
+    if (localStorage.getItem('popular')) {
       this.renderMovies();
-    }else{
-    this.fetchMovies();
+    } else {
+      this.fetchMovies();
 
     }
   }
@@ -65,9 +65,12 @@ onAuthStateChanged(auth, (user) => {
       .get(`https://api.themoviedb.org/3/tv/${category}?api_key=${API_KEY}`)
       .catch((err) => console.log(err));
     this.setState(
-      { popularMovies: data.data.results.slice(0, 10) ,
-      filteredMovies: data.data.results.slice(0, 10),
-       });
+      {
+        popularMovies: data.data.results.slice(0, 10),
+        filteredMovies: data.data.results.slice(0, 10)
+      });
+
+    localStorage.setItem('popular', JSON.stringify(this.state.popularMovies));
 
       localStorage.setItem('popular', JSON.stringify(this.state.popularMovies));
       
@@ -88,8 +91,8 @@ onAuthStateChanged(auth, (user) => {
     });
   };
   handleFilter = async (value) => {
-    if(localStorage.getItem(value)){
-      let filtered = JSON.parse(localStorage.getItem(value)).slice(0,10);
+    if (localStorage.getItem(value)) {
+      let filtered = JSON.parse(localStorage.getItem(value)).slice(0, 10);
       console.log(filtered);
       this.setState({filteredMovies: filtered})
     }else {
@@ -131,12 +134,14 @@ onAuthStateChanged(auth, (user) => {
                   filteredMovies={this.state.filteredMovies}
                   popularMovies={this.state.popularMovies}
                   handleFilter={this.handleFilter}
+                  
                 
                 />
               }
             />
             <Route path="/profile" element={<ProfileWrapper/>}></Route>
-                        <Route exact path="/movie/:id" element={<SingleProduct />} />
+            <Route path="/TV/:id" element={<SingleProduct />} />
+          <Route path="/movie/:movie_id" element={<SingleProduct />} />
 
           </Routes>
      

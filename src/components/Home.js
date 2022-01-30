@@ -7,7 +7,6 @@ import Product from "./Home/Product";
 import Card from "./Home/Card";
 import SingleCard from "./Home/SingleCard";
 import Partner from "./Home/Partner";
-import { loadScripts } from "../loadScripts";
 import "./userAuthorization/sectionBackground.css";
 import { fetchMovies } from "../fetchData";
 import { getAuth } from "firebase/auth";
@@ -63,9 +62,15 @@ export default class Home extends Component {
 
   }
 
-  moviePrice = () => {
+  moviePrice = (rating) => {
+    
+    if(rating <5)return 10;
+    if((rating <7.5) && rating > 5)return 15;
+    if(rating > 7.5)return 20;
+    
 
-  }
+    }
+  
 
   render() {
     console.log('render');
@@ -104,7 +109,8 @@ export default class Home extends Component {
                     category={movie.origin_country}
                     rating={movie.vote_average}
                     desc={movie.overview}
-                    price={this.moviePrice}
+                    price={this.moviePrice(movie.vote_average)}
+
                   />
                     )}
                  
@@ -119,12 +125,9 @@ export default class Home extends Component {
             <div class="container">
               <div class="row">
                 <div class="col-12">
-                  {/* <!-- content title --> */}
+          
                   <h2 class="content__title">New items</h2>
 
-                  {/* <!-- end content title -->
-
-						<!-- content tabs nav --> */}
                   <ul
                     class="nav nav-tabs content__tabs"
                     id="content__tabs"
@@ -209,6 +212,8 @@ export default class Home extends Component {
 
                   {this.props.filteredMovies?.map((movie) => {
                     if (movie.overview === "") return;
+                 
+
                     if (movie.name === "Young Royals")return;
                       return (
                         <Card
@@ -219,7 +224,7 @@ export default class Home extends Component {
                           category={movie.origin_country}
                           rating={movie.vote_average}
                           desc={movie.overview}
-                          price={this.moviePrice}
+                          price={this.moviePrice(movie.vote_average)}
                         />
                       );
                   }
@@ -244,10 +249,11 @@ export default class Home extends Component {
                 return (
                   <SingleCard
                     key={movie.id}
+                    id={movie.id}
                     title={movie.name}
                     image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                     rating={movie.vote_average}
-                    price={this.moviePrice}
+                    price={this.moviePrice(movie.vote_average)}
                   />
                 );
               })}
