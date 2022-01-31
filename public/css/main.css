@@ -4346,3 +4346,16 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 
 }
+@media(max-width:1120px){
+  .header__cart{
+    right: 14rem;
+  }
+}
+@media (max-width:400px){
+  .header__cart{
+    
+    right: 6rem;
+    
+  }
+
+}

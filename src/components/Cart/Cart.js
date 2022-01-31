@@ -25,6 +25,7 @@ class Cart extends Component {
            else if (movie.vote_average > 7.5) price=20;
            total+=price;
            cartWithPrice.push({...movie,price:price})
+           localStorage.setItem('cart',JSON.stringify(cartWithPrice));
 
          
 

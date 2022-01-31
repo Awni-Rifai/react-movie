@@ -8,6 +8,7 @@ import Error from "../Error";
 import './sectionBackground.css'
 import Helmet from "react-helmet";
 import { getFromDatabase } from "../../order";
+import { Link } from "react-router-dom";
 export default class Register extends Component {
  
   state = {
@@ -15,11 +16,18 @@ export default class Register extends Component {
     email: "",
     password: "",
     error:{body:"",email:"",password:""},
-    loading:false
+    loading:false,
+    checkout:false
   };
   componentDidMount(){
     window.scrollTo(0,0);
-    // getFromDatabase();
+    //check if the user cam from the checkout page
+    const checkoutCheck=localStorage.getItem('checkout');
+    if(checkoutCheck && checkoutCheck==='true'){
+      this.setState({checkout:true})
+      localStorage.removeItem('checkout')
+
+    }
   }
   renderError=(message)=>{
     
@@ -46,8 +54,15 @@ export default class Register extends Component {
         displayName: this.state.name, photoURL: "https://example.com/jane-q-user/profile.jpg"
       }).then(() => {
         // Profile updated!
-        this.setState({error:{body:"",email:"",password:""}})
-        this.props.navigate('/')
+        this.setState({error:{body:"",email:"",password:"",checkout:false}})
+        if(localStorage.getItem('checkout')){
+          localStorage.removeItem('checkout');
+          this.props.navigate(-1)
+        }
+        else{
+          this.props.navigate('/');
+        }
+        
         // ...
       }).catch((error) => {
         // An error occurred
@@ -126,12 +141,15 @@ validateUser=()=>{
       {this.state.loading?<Spinner container='spinner_container' spinner_item='spinner_item' background='background'/>:''} 
         <div  className="container">
           <div className="row">
+          
             
             <div className="col-12">
             
               <div className="sign__content">
+                
              
-                <form action="#" className="sign__form">
+                <form action="#" className="sign__form" style={{marginTop:'50px'}}>
+                {this.state.checkout &&  <h4 className="col-lg-12 signin_before_checkout_message" style={{color: 'red', textAlign: 'center' , fontSize:'1rem',padding:'0rem 0rem', marginTop:'0',marginBottom:'20px'}}>you need to sign in to continue your order</h4>}
                   <a href="index.html" className="sign__logo">
                     <img src="img/logo.svg" alt="" />
                   </a>
@@ -189,7 +207,7 @@ validateUser=()=>{
 
 
                   <span className="sign__text">
-                    Already have an account? <a onClick={this.signIn}>Sign in!</a>
+                    Already have an account? <Link to='../login'>Sign in!</Link> 
                   </span>
                 </form>
               </div>
