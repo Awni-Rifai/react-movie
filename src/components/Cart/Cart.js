@@ -3,6 +3,7 @@ import BreadCrump from "../BreadCrump";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import MovieInfo from "../single-product/MovieInfo";
+import { Link } from "react-router-dom";
 
 class Cart extends Component {
     
@@ -101,9 +102,9 @@ class Cart extends Component {
                 <span>Total: </span> <span>{this.state.totalPrice}$</span>
               </div>
 
-              <button href="#" className="checkout_btn">
+              <Link to={"/checkOut"}><button  className="checkout_btn">
                 Check out
-              </button>
+              </button></Link> 
             </div>
           </div>
         </div>
