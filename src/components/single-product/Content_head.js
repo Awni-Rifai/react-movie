@@ -19,13 +19,9 @@ export default class Content_head extends Component {
                                         <a className="nav-link active" data-toggle="tab" style={{'cursor': 'pointer'}}  role="tab" aria-controls="tab-1" onClick={()=> this.props.ShowComments() } aria-selected="true">Comments</a>
                                     </li>
 
-                                    <li className="nav-item">
-                                        <a className="nav-link" data-toggle="tab" style={{'cursor': 'pointer'}}  role="tab" aria-controls="tab-2" onClick={()=> this.props.ShowReviews() } aria-selected="false">Reviews</a>
-                                    </li>
+                                 
 
-                                    <li className="nav-item">
-                                        <a className="nav-link" data-toggle="tab" style={{'cursor': 'pointer'}} role="tab" aria-controls="tab-3" onClick={()=> this.props.ShowPhotos() } aria-selected="false">Photos</a>
-                                    </li>
+                                    
                                 </ul>
                                 {/* <!-- end content tabs nav --> */}
 
@@ -41,11 +37,7 @@ export default class Content_head extends Component {
                                             <li className="nav-item"><a className="nav-link active" id="1-tab" data-toggle="tab"
                                              href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true" >Comments</a></li>
 
-                                            <li className="nav-item"><a className="nav-link" id="2-tab" 
-                                            data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false" >Reviews</a></li>
-
-                                            <li className="nav-item"><a className="nav-link" id="3-tab"
-                                             data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false" >Photos</a></li>
+                                
                                         </ul>
                                     </div>
                                 </div>

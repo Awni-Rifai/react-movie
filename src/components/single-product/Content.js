@@ -111,9 +111,9 @@ function Content(props) {
                 <div className="col-12 col-lg-8 col-xl-8">
                     {/* <!-- content tabs --> */}
                     <div className="tab-content" id="myTabContent">
-                    {props.commentsState && <Comments auth={authState} username={username}  addComment={addComment} handleSubmit={handleSubmit}  comments={comments} />}
-                        {props.reviewsState && <Reviews />}
-                        {props.galleryState && <Gallery />}
+                        {props.commentsState && <Comments  addComment={addComment} handleSubmit={handleSubmit}  comments={comments} />}
+                       
+                       
                     </div>
                     {/* <!-- end content tabs --> */}
                 </div>

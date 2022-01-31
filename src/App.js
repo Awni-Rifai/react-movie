@@ -16,6 +16,7 @@ import React, { Component } from 'react';
 import ProfileWrapper from './components/userProfile/ProfileWrapper';
 import { saveINDatabase } from './order';
 import Cart from './components/Cart/Cart';
+import ContactInfo from './components/ContactInfo';
 
 export default class App extends Component {
   state = {
@@ -129,6 +130,7 @@ export default class App extends Component {
           <Route path="*" element={<NotFound />} />
 
           <Route exact path="/store" element={<Item />} />
+          <Route exact path="/checkOut" element={<ContactInfo/>} />
           <Route
             exact
             path="/movie"
