@@ -60,7 +60,7 @@ export default class ContactInfo extends Component {
       country: this.state.country,
       totalPrice: this.state.totalPrice,
       cart: JSON.stringify(this.state.cart),
-      id: this.state.id,
+      user_id: this.state.id,
       created: Timestamp.now(),
     };
 
@@ -99,12 +99,12 @@ export default class ContactInfo extends Component {
           {/* grid content */}
           <div className="row">
             <div className="col-12 col-lg-8">
-              <form action="#" className="sign__form ">
+              <form action="#" className="sign__form checkout__form__form ">
                 <a href="index.html" className="sign__logo">
                   <img src="img/logo.svg" alt="" />
                 </a>
                 <Row>
-                  <Col md={6}>
+                  <Col  sm={12}  md={6}>
                     <div className="sign__group">
                       <input
                         value={this.state.firstname}
@@ -117,7 +117,7 @@ export default class ContactInfo extends Component {
                       />
                     </div>
                   </Col>
-                  <Col md={6}>
+                  <Col  sm={12} md={6}>
                     <div className="sign__group">
                       <input
                         value={this.state.lastname}
@@ -132,13 +132,15 @@ export default class ContactInfo extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col md={6}>
-                    <FormGroup className="dropdown-container">
+                  <Col  sm={12} md={6}>
+                  <div className="sign__group">
+                   
                       <CountryOptions addCountry={this.addCountry} />
-                    </FormGroup>
+                  
+                    </div>
                   </Col>
 
-                  <Col md={6}>
+                  <Col sm={12}  md={6}>
                     <div className="sign__group">
                       <input
                         value={this.state.phone}
@@ -154,7 +156,7 @@ export default class ContactInfo extends Component {
                 </Row>
                 <Row form>
                   <Row>
-                    <Col md={12}>
+                    <Col sm={12}  md={12}>
                       <div className="sign__group">
                         <input
                           value={this.state.email}

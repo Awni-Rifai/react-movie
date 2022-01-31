@@ -120,7 +120,7 @@ export default function  Navbar(props){
                       <button className="header__cart-btn" type="">
                       <Link to='/cart' className="ion-ios-cart"><i></i></Link>
                     </button>
-                    <span className="cartNum">{!emptyCart?props.cartCount:0}</span>
+                    <span className="cartNum">{props.cartCount}</span>
                             </div>  
 
                   <button className="header__btn" type="button">

@@ -4,6 +4,8 @@ import { auth } from "../userAuthorization/firebase";
 import * as validate from '../../validate';
 import Error from "../Error";
 import Spinner from "../Spinner";
+import { db } from '../userAuthorization/firebase'
+import { collection, addDoc, Timestamp, query, onSnapshot, where, getDocs, orderBy } from 'firebase/firestore'
 
 export default class UserProfile extends Component {
   state = {
@@ -15,14 +17,20 @@ export default class UserProfile extends Component {
     creationTime: "",
     uid: null,
     error:{body:"",email:"",password:"", name:'',phoneNumber: "",},
-    loading:false
+    loading:false,
+    userOrders:[],
   };
 
   componentDidMount() {
+      
+      
+  
+    
+      //!---------------------------------------
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.setState({ auth: true });
-        console.log(user);
+        
         this.setState({
           name: user.displayName,
           email: user.email,
@@ -34,8 +42,35 @@ export default class UserProfile extends Component {
       } else {
         this.setState({ auth: false });
         this.props.navigate("../Not-Found");
+
       }
-    });
+      this.setState({loading:true})
+      if(!this.state.uid)return
+      const q = query(collection(db, 'orders') ,where('user_id', "==", this.state.uid) );
+      onSnapshot(q, (querySnapshot) => {
+          const results=[];
+          const cart=[];
+          querySnapshot.docs.forEach((doc) => {    
+              const result=doc.data();
+              const cart=JSON.parse(result.cart);
+              const movies=cart.map(movie=>{
+                  return {name:movie.name||movie.title,price:movie.price,image:movie.poster_path}
+              });
+            
+              
+              
+              results.push({...result,movies})
+          })
+
+          
+          
+          this.setState({userOrders:results})
+          this.setState({loading:false})
+      })
+      
+
+    }); 
+   
   }
   validateUser=()=>{
     try{
@@ -102,6 +137,7 @@ export default class UserProfile extends Component {
 }
   
   render() {
+      console.log(this.state.userOrders);
     return (
       <div>
         <section
@@ -137,6 +173,8 @@ export default class UserProfile extends Component {
             <div class="container">
               <div class="row">
                 <div class="col-12">
+                <div class="row">
+                  
                
                   <div class="profile__content">
                     <div class="profile__user">
@@ -253,7 +291,8 @@ export default class UserProfile extends Component {
                 aria-labelledby="1-tab"
               >
                 <div class="row">
-                  <div class="col-12 col-lg-6">
+                    {/* profile details */}
+                  <div class="col-12 col-lg-6 m-auto">
                     
                     <form  action="#" class="profile__form">
                   
@@ -300,7 +339,7 @@ export default class UserProfile extends Component {
                           </div>
                         </div>
 
-                        <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                        <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                           <div class="profile__group">
                             <label class="profile__label" for="email">
                               Email
@@ -347,7 +386,7 @@ export default class UserProfile extends Component {
                     </form>
                   </div>
 
-                  <div class="col-12 col-lg-6">
+                  {/* <div class="col-12 col-lg-6">
                     <form action="#" class="profile__form">
                       <div class="row">
                         <div class="col-12">
@@ -403,97 +442,49 @@ export default class UserProfile extends Component {
                         </div>
                       </div>
                     </form>
-                  </div>
+                  </div> */}
                 </div>
               </div>
-
+            
               <div
                 class="tab-pane fade"
                 id="tab-2"
                 role="tabpanel"
                 aria-labelledby="2-tab"
               >
-                <div class="row">
-                  <div class="col-12 col-md-6 col-lg-4">
-                    <div class="price price--profile">
-                      <div class="price__item price__item--first">
-                        <span>Basic</span> <span>Free</span>
-                      </div>
-                      <div class="price__item">
-                        <span>7 days</span>
-                      </div>
-                      <div class="price__item">
-                        <span>720p Resolution</span>
-                      </div>
-                      <div class="price__item">
-                        <span>Limited Availability</span>
-                      </div>
-                      <div class="price__item">
-                        <span>Desktop Only</span>
-                      </div>
-                      <div class="price__item">
-                        <span>Limited Support</span>
-                      </div>
-                      <a href="#" class="price__btn">
-                        Choose Plan
-                      </a>
-                    </div>
-                  </div>
+                  {this.state.loading?<Spinner container='spinner_container' spinner_item='spinner_item' background='background'/>:''} 
+                    { this.state.userOrders?.map(order=>{
+                        return(
+                          <div class="col-12 col-md-12 col-lg-12">
+                          <div class="price price--profile">
+                            <div class="price__item price__item--first">
+                              <span>Date of Purchase: {new Date(order?.created?.seconds*1000).toString().slice(0,15)}</span> <span>Total:{order.totalPrice}$</span>
+                            </div>
+                            {order?.movies.map(movie=>{
+                                return(
+                                    <div class="price__item" style={{fontSize:'1.2rem'}}>
+                                        
+                                    <span>{movie.name}</span>
+                                    <img style={{margin:'auto',display:'block',width:'10%'}} src={"https://image.tmdb.org/t/p/w500"+movie.image} alt="" />
+                                    <span style={{marginLeft:'auto',marginRight:'0',color:'#ff5860'}}>{movie.price}$</span>
+                                    
+                                  </div>
+                                )
 
-                  <div class="col-12 col-md-6 col-lg-4">
-                    <div class="price price--profile price--premium">
-                      <div class="price__item price__item--first">
-                        <span>Premium</span> <span>$19.99</span>
-                      </div>
-                      <div class="price__item">
-                        <span>1 Month</span>
-                      </div>
-                      <div class="price__item">
-                        <span>Full HD</span>
-                      </div>
-                      <div class="price__item">
-                        <span>Lifetime Availability</span>
-                      </div>
-                      <div class="price__item">
-                        <span>TV & Desktop</span>
-                      </div>
-                      <div class="price__item">
-                        <span>24/7 Support</span>
-                      </div>
-                      <a href="#" class="price__btn">
-                        Choose Plan
-                      </a>
-                    </div>
-                  </div>
-
-                  <div class="col-12 col-md-6 col-lg-4">
-                    <div class="price price--profile">
-                      <div class="price__item price__item--first">
-                        <span>Cinematic</span> <span>$39.99</span>
-                      </div>
-                      <div class="price__item">
-                        <span>2 Months</span>
-                      </div>
-                      <div class="price__item">
-                        <span>Ultra HD</span>
-                      </div>
-                      <div class="price__item">
-                        <span>Lifetime Availability</span>
-                      </div>
-                      <div class="price__item">
-                        <span>Any Device</span>
-                      </div>
-                      <div class="price__item">
-                        <span>24/7 Support</span>
-                      </div>
-                      <a href="#" class="price__btn">
-                        Choose Plan
-                      </a>
-                    </div>
-                  </div>
+                            })}
+                           
+                          
+                            
+                          </div>
+                        </div>
+                        )
+                    }) }
+                
+                
                 </div>
               </div>
-            </div>
+              
+                          </div>
           </div>
         </div>
       </div>
