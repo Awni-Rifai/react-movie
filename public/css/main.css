@@ -2414,7 +2414,7 @@ ul {
   }
   .checkout_btn{
     /* left: 5rem; */
-    width:7vw;
+    width:95%;
   }
 }
 @media (min-width: 350px) and (max-width: 1000px) {
@@ -2426,7 +2426,7 @@ ul {
     align-content: center;
     align-content: center;
 
-    width:5vw;
+    width:95%;
    
   }
 
