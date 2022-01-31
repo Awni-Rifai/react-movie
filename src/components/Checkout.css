@@ -32,6 +32,15 @@
         width:90%;
         margin-left: 0;
     }
+    .weather__container{
+        
+        
+        margin-left:10rem !important;
+        margin-right: 0 !important;
+        font-size: 1rem !important;
+        
+    }
+ 
     /* .checkout__form{
         display: flex;
         justify-content: flex-start;

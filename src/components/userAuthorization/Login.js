@@ -153,9 +153,9 @@ export default class Login extends Component {
                     Don't have an account? <a href="signup.html">Sign up!</a>
                   </span>
 
-                  <span className="sign__text">
+                  {/* <span className="sign__text">
                     <a href="forgot.html">Forgot password?</a>
-                  </span>
+                  </span> */}
                 </form>
               </div>
             </div>

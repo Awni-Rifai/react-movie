@@ -6,6 +6,7 @@ import Error from "../Error";
 import Spinner from "../Spinner";
 import { db } from '../userAuthorization/firebase'
 import { collection, addDoc, Timestamp, query, onSnapshot, where, getDocs, orderBy } from 'firebase/firestore'
+import Weather from "../weather/weather";
 
 export default class UserProfile extends Component {
   state = {
@@ -186,6 +187,7 @@ export default class UserProfile extends Component {
                         <h3>{this.state.name}</h3>
                         <span>FlixGo ID: 480</span>
                       </div>
+                      
                     </div>
 
                     <ul
@@ -215,16 +217,23 @@ export default class UserProfile extends Component {
                           aria-controls="tab-2"
                           aria-selected="false"
                         >
-                          Subscription
+                          Orders
                         </a>
                       </li>
+                      <li>
+                          <div style={{}} className="nav-item weather__container  ">
+                   <Weather/>
+                        
+                      </div>
+                          </li>
                     </ul>
 
                     <div
                       class="content__mobile-tabs content__mobile-tabs--profile"
                       id="content__mobile-tabs"
                     >
-                      <div
+                        <div className="d-flex justify-content-center">
+                        <div
                         class="content__mobile-tabs-btn dropdown-toggle"
                         role="navigation"
                         id="mobile-tabs"
@@ -232,9 +241,19 @@ export default class UserProfile extends Component {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
+                          
                         <input type="button" value="Profile" />
                         <span></span>
+                      
+                         
+                        
                       </div>
+                      <div style={{}} className="nav-item weather__container  ">
+                   <Weather/>
+                        
+                      </div>
+                        </div>
+                   
 
                       <div
                         class="content__mobile-tabs-menu dropdown-menu"
@@ -265,9 +284,10 @@ export default class UserProfile extends Component {
                               aria-controls="tab-2"
                               aria-selected="false"
                             >
-                              Subscription
+                              Orders
                             </a>
                           </li>
+                         
                         </ul>
                       </div>
                     </div>
@@ -276,6 +296,7 @@ export default class UserProfile extends Component {
                       <i class="icon ion-ios-log-out"></i>
                       <span>Logout</span>
                     </button> */}
+                   
                   </div>
                 </div>
               </div>
