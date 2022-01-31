@@ -1,5 +1,6 @@
 import React from 'react';
 import { Input } from "reactstrap";
+import '../Checkout.css'
 
 class countryOptions extends React.Component {
   countryChangeHandler=(e)=>{
@@ -8,7 +9,7 @@ class countryOptions extends React.Component {
   }
     render() {
 		return (
-			<Input onChange={this.countryChangeHandler} className="custom-select" style={{background: "#2b2b31" , color:'rgb(160 163 165)' , border:'none',marginLeft:'2rem',marginTop:'1rem',height:'3rem',borderRadius:'0',width:'95%'}} type="select" name="coSelectCountry" id="coCountry">
+			<Input onChange={this.countryChangeHandler} className="country__selection" type="select" name="coSelectCountry" id="coCountry">
               <option data-code="JO"  defaultValue="selected" value="Jordan">Jordan</option>
                 <option data-code="US"  value="United States">United States</option>
                 <option data-code="CA" value="Canada">Canada</option>

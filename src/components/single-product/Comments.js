@@ -5,7 +5,8 @@ export default class Comments extends Component {
       super(props)
     
       this.state = {
-         body: "" 
+         body: "" ,
+         auth:false,
       }
     }
     addCommentHandler=(e)=>{
