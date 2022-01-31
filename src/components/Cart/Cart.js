@@ -18,13 +18,14 @@ class Cart extends Component {
       else this.setState({emptyCart:false})
       const cartWithPrice=[];
       let total=0;
-      cart.forEach(movie=>{
+      cart?.forEach(movie=>{
           let price=0;
            if (movie.vote_average< 5)price=10;
            else if (movie.vote_average < 7.5 && movie.vote_average > 5) price = 15;
            else if (movie.vote_average > 7.5) price=20;
            total+=price;
            cartWithPrice.push({...movie,price:price})
+           localStorage.setItem('cart',JSON.stringify(cartWithPrice));
 
          
 
@@ -35,21 +36,35 @@ class Cart extends Component {
 
     console.log(this.state.totalPrice);
   }
-  deleteItem(name) {
+  deleteItem(id) {
     console.log([this.state.cartMovies.vote_average]);
 
     const deleteItem = this.state.cartMovies;
-    const filteredItems = deleteItem.filter((item) => item.name !== name);
+    
+    const filteredItems = deleteItem.filter((item) =>item.id!==id);
+   
+    let price
+    deleteItem.forEach(item=>{
+      console.log(item.price);
+      if(item.id===id){
+        price=item.price;
+      }
+    });
+    
+
+    
     const count=filteredItems.length||0;
+    
     localStorage.setItem("cart", JSON.stringify(filteredItems));
     this.setState({
-      cartMovies: filteredItems,
+      cartMovies: filteredItems,totalPrice:this.state.totalPrice-price,emptyCart:count===0?true:false
     });
     this.props.deleteElement(count);
   }
   deleteCart = () => {
     const deleteCart = localStorage.removeItem('cart');
-    this.setState({ cartMovies: deleteCart });
+    this.setState({ cartMovies: deleteCart,totalPrice:0 ,emptyCart:true});
+
   };
  
    
@@ -61,7 +76,12 @@ class Cart extends Component {
         <BreadCrump />
 
         <div class="col-12 col-md-6 col-lg-12">
-          <div class="price">
+        {this.state.emptyCart ? (
+              <h4 style={{color: 'white', textAlign: 'center' , fontSize:'2.8rem',padding:'4rem 0rem', marginTop:'20px'}} className="col-lg-12">The cart is empty</h4>
+            ) : (
+              ""
+            )}
+        {!this.state.emptyCart && <div class="price">
             <div class="price__item price__item--first">
               <span>Cart</span>
               <span>
@@ -75,14 +95,10 @@ class Cart extends Component {
               <span className="col-4">price</span>
               <span className="col-4">delete</span>
             </div>
-            {this.state.emptyCart ? (
-              <h4 style={{color: 'white', textAlign: 'center' , fontSize:'3rem', marginTop:'20px'}} className="col-lg-12">The cart is empty</h4>
-            ) : (
-              "Awbn"
-            )}
+           
             {this.state.cartMovies?.map((cart) => (
               <div class="price__item row">
-                <span className="col-4">{cart.name}</span>
+                <span className="col-4">{cart.name ||cart.title}</span>
 
                 <span className="col-4">
                   {cart.price}${/* {this.allPrices()}     */}
@@ -90,7 +106,7 @@ class Cart extends Component {
                 <span className="col-4">
                   <button
                     className="delete-btn"
-                    onClick={() => this.deleteItem(cart.name)}
+                    onClick={() => this.deleteItem(cart.id)}
                   >
                     Delete
                   </button>
@@ -106,7 +122,7 @@ class Cart extends Component {
                 Check out
               </button></Link> 
             </div>
-          </div>
+          </div>}
         </div>
       </div>
     );

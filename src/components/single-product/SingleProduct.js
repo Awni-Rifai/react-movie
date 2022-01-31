@@ -75,7 +75,7 @@ function SingleProduct(props) {
         price={moviePrice(movieInfo.vote_average)}
         addElementToCart={addElementToCart}
       />
-      <MovieDesc />
+      <MovieDesc movieInfo={movieInfo} />
     </div>
   );
 

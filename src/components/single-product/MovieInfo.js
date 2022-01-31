@@ -3,17 +3,32 @@ import { Link, useParams } from 'react-router-dom'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import YouTube from 'react-youtube'
+import './Youtube.css'
 function MovieInfo(props) {
+  
 	
 	const addToCart = () => {
+    console.log('entered');
 	if(localStorage.getItem('cart')){
 		let oldCart=JSON.parse(localStorage.getItem('cart'));
-
-		oldCart=oldCart.filter(movie=>movie.name!==props.movieInfo.name)
+    let alreadyExcists=false;
+   oldCart.forEach(movie => {
+    
+      if(movie.id===props.movieInfo.id){
+        alreadyExcists=true;
+        return;
+      }
+      
+    });
+    if(alreadyExcists)return 
+    
+    
 	
 		const cart = [...oldCart, props.movieInfo];
+    console.log('new_cart',cart);
 		localStorage.setItem('cart',JSON.stringify(cart));
 	}else {
+    console.log('else');
 
 		localStorage.setItem('cart', JSON.stringify([props.movieInfo]))
 	}
@@ -102,7 +117,8 @@ function MovieInfo(props) {
             <div className="col-12 col-xl-6 col-sm-12">
               {props.trailer ? (
                 <YouTube
-                  videoId={props.trailer.key}
+                className='mobile_player'
+                videoId={props.trailer.key}
                   opts={{
                     height: "390",
                     width: "640",

@@ -5,6 +5,8 @@ import Related_movie from './Related_movie';
 import Reviews from './Reviews';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../userAuthorization/firebase';
 
 import { db } from '../userAuthorization/firebase'
 import { collection, addDoc, Timestamp, query, onSnapshot, where, getDocs, orderBy } from 'firebase/firestore'
@@ -13,27 +15,41 @@ function Content(props) {
     const [createComment, setCreateComment] = useState(false);
     const [comments, setComments] = useState([])
     const [commentId, setCommentId] = useState(null)
+    const [authState,setAuthState]=useState(false);
+    const [username,setUsername]=useState('')
     // let comment_id = ""
     let { id, movie_id } = useParams();
     
    const addComment = async (body)=>{
+       if(!authState)return
+       console.log(props.movieInfo);
+       if(!props.movieInfo)return;
 
-    console.log("start add comment",body);
-    const doc = { body: body, user_id: 0, movie_id: props.movieInfo.id, created: Timestamp.now() }
+    
+    const doc = { body: body, username: username, movie_id: props.movieInfo.id, created: Timestamp.now() }
     console.log(doc);
     try {
          addDoc(collection(db, 'comments'),doc).then(() =>{
             setCreateComment(true)
         })
-        console.log("comment created");
+     
     } catch (err) {
         console.log(err)
     }
    }
             useEffect(()=>{
-                console.log("useEffect");
+                
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                      setAuthState(true);
+                      
+                      setUsername(  user.displayName );
+                    } else {
+                      setAuthState(false)
+                    }
+                  });
+            
                 if (id) {
-                    console.log("fetch started" );
                     fetchComments(id)
                     
                 } else if (movie_id) {
@@ -41,9 +57,9 @@ function Content(props) {
 
                 }
 
-            },[id,movie_id])
+            },[])
     
-    console.log(commentId);
+ 
 
 
     const handleSubmit = async (e) => {

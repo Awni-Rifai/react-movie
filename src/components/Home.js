@@ -11,6 +11,7 @@ import "./userAuthorization/sectionBackground.css";
 import { fetchMovies } from "../fetchData";
 import { getAuth } from "firebase/auth";
 import Spinner from "./Spinner";
+import './Carousel.css'
 
 // console.log = console.warn = console.error = () => {};
 

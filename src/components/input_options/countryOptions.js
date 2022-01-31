@@ -2,10 +2,15 @@ import React from 'react';
 import { Input } from "reactstrap";
 
 class countryOptions extends React.Component {
+  countryChangeHandler=(e)=>{
+    this.props.addCountry(e.target.value)
+
+  }
     render() {
 		return (
-			<Input className="custom-select" style={{background: "#2b2b31" , color:'rgb(160 163 165)' , border:'none',height:'50px',borderRadius:'0',width:'280px'}} type="select" name="coSelectCountry" id="coCountry">
-                <option data-code="US" defaultValue="selected" value="United States">United States</option>
+			<Input onChange={this.countryChangeHandler} className="custom-select" style={{background: "#2b2b31" , color:'rgb(160 163 165)' , border:'none',marginLeft:'2rem',marginTop:'1rem',height:'3rem',borderRadius:'0',width:'95%'}} type="select" name="coSelectCountry" id="coCountry">
+              <option data-code="JO"  defaultValue="selected" value="Jordan">Jordan</option>
+                <option data-code="US"  value="United States">United States</option>
                 <option data-code="CA" value="Canada">Canada</option>
                 <option disabled="disabled" value="---">---</option>
                 <option data-code="AF" value="Afghanistan">Afghanistan</option>
@@ -113,12 +118,11 @@ class countryOptions extends React.Component {
                 <option data-code="IQ" value="Iraq">Iraq</option>
                 <option data-code="IE" value="Ireland">Ireland</option>
                 <option data-code="IM" value="Isle Of Man">Isle of Man</option>
-                <option data-code="IL" value="Israel">Israel</option>
                 <option data-code="IT" value="Italy">Italy</option>
                 <option data-code="JM" value="Jamaica">Jamaica</option>
                 <option data-code="JP" value="Japan">Japan</option>
                 <option data-code="JE" value="Jersey">Jersey</option>
-                <option data-code="JO" value="Jordan">Jordan</option>
+               
                 <option data-code="KZ" value="Kazakhstan">Kazakhstan</option>
                 <option data-code="KE" value="Kenya">Kenya</option>
                 <option data-code="KI" value="Kiribati">Kiribati</option>

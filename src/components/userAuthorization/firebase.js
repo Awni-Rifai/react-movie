@@ -10,6 +10,7 @@ import { getAuth} from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
+//? Ali
 // const firebaseConfig = {
 //   apiKey: "AIzaSyCSpCG2T_yhZBY-LGN-d0vpbbinK0TF0wk",
 //   authDomain: "ali-fire-test.firebaseapp.com",
@@ -18,6 +19,17 @@ import { getAuth} from "firebase/auth";
 //   messagingSenderId: "32079689380",
 //   appId: "1:32079689380:web:d7feff7c7822e25fe11831"
 // };
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDu7-8QeorOw814y9cqFS_1s3vwJPSs87E",
+//   authDomain: "react-movie-e3147.firebaseapp.com",
+//   projectId: "react-movie-e3147",
+//   storageBucket: "react-movie-e3147.appspot.com",
+//   messagingSenderId: "42861137742",
+//   appId: "1:42861137742:web:5ad8ec95a9f57292abd81f",
+//   measurementId: "G-09D8F3C8GG"
+// };
+
+//? Awni
 const firebaseConfig = {
   apiKey: "AIzaSyDu7-8QeorOw814y9cqFS_1s3vwJPSs87E",
   authDomain: "react-movie-e3147.firebaseapp.com",
