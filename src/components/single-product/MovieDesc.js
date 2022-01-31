@@ -57,6 +57,7 @@ export default class MovieDesc extends Component {
 
 
                     <Content
+                        movieInfo={this.props.movieInfo}
                         commentsState={this.state.commentsState}
                         reviewsState={this.state.reviewsState}
                         galleryState={this.state.galleryState} />

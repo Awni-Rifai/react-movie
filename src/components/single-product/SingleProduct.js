@@ -9,10 +9,11 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function SingleProduct() {
+function SingleProduct(props) {
   const [movieInfo, setMovieInfo] = useState({})
   const [trailer, setTrailer] = useState()
   let url=""
+  let comment_id= ''
   // console.log("movieInfo",movieInfo);
   let { id, movie_id } = useParams();
 
@@ -21,9 +22,10 @@ function SingleProduct() {
   const API_KEY = '9b630d54f9503a9613dd2019e5cc7417';
   if (id) {
        url =`https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&append_to_response=videos`
+       comment_id = id
   }else if (movie_id) {
     url =`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${API_KEY}&append_to_response=videos`
-
+    comment_id = movie_id
   }
   const fetchMovie = useCallback(async () => {
     const { data } = await axios.get(url)
@@ -53,11 +55,29 @@ function SingleProduct() {
       </section>
     )
   }
+  const moviePrice = (rating) => {
 
-  return (<div>
-    <MovieInfo movieInfo={movieInfo} trailer={trailer} />
-    <MovieDesc  />
-  </div>);
+      if(rating <5)return 10;
+    if((rating <7.5) && rating > 5)return 15;
+    if(rating > 7.5)return 20;
+   
+  }
+ const addElementToCart = (cartCount) => {
+   console.log(props)
+   props.addElementToCart(cartCount);
+ };
+
+  return (
+    <div>
+      <MovieInfo
+        movieInfo={movieInfo}
+        trailer={trailer}
+        price={moviePrice(movieInfo.vote_average)}
+        addElementToCart={addElementToCart}
+      />
+      <MovieDesc movieInfo={movieInfo} />
+    </div>
+  );
 
 }
 export default SingleProduct
