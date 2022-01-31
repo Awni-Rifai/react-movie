@@ -4,6 +4,7 @@ import { auth } from "../userAuthorization/firebase";
 import * as validate from '../../validate';
 import Error from "../Error";
 import Spinner from "../Spinner";
+import Weather from "../weather/Weather";
 
 export default class UserProfile extends Component {
   state = {
@@ -148,6 +149,7 @@ export default class UserProfile extends Component {
                         <h3>{this.state.name}</h3>
                         <span>FlixGo ID: 480</span>
                       </div>
+                      
                     </div>
 
                     <ul
@@ -238,6 +240,10 @@ export default class UserProfile extends Component {
                       <i class="icon ion-ios-log-out"></i>
                       <span>Logout</span>
                     </button> */}
+                     <div style={{marginLeft: '6rem'}} className="profile__meta col-4 ">
+                   <Weather/>
+                        
+                      </div>
                   </div>
                 </div>
               </div>
