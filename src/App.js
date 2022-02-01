@@ -19,6 +19,8 @@ import Cart from './components/Cart/Cart';
 import ContactInfoWrapper from './components/ContactInfoWrapper';
 import Successful from './components/Successful';
 
+
+
 export default class App extends Component {
   state = {
     popularMovies: [],
@@ -29,7 +31,7 @@ export default class App extends Component {
     username: "",
     cartCount: 0,
   };
-
+  
   componentDidMount() {
     window.scrollTo(0, 0);
     const auth = getAuth();
@@ -113,10 +115,15 @@ export default class App extends Component {
   deleteElement=(count)=>{
     this.setState({cartCount:count})
   }
+  // emptyCart=()=>{
+  //   this.setState({cartCount:0});
+
+  // }
 
   // this.fetchMovies();
 
   render() {
+    // console.log = console.warn = console.error = () => {};
     return (
       <div className="App">
         <Navbar
@@ -150,7 +157,7 @@ export default class App extends Component {
             }
           />
           <Route path="/profile" element={<ProfileWrapper />}></Route>
-          <Route path="/successful" element={<Successful />}></Route>
+          <Route path="/successful" element={<Successful  />}></Route>
           <Route
             path="/TV/:id"
             element={<SingleProduct addElementToCart={this.addElementToCart} />}

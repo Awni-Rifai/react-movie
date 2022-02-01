@@ -20,8 +20,8 @@ class Footer extends Component {
                         <div class="col-6 col-sm-4 col-md-3">
                             <h6 class="footer__title">Resources</h6>
                             <ul class="footer__list">
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="pricing.html">Pricing Plan</a></li>
+                                <li><a href="about.html">Home</a></li>
+                                <li><a href="pricing.html">Shop</a></li>
                                 <li><a href="faq.html">Help</a></li>
                             </ul>
                         </div>
@@ -39,20 +39,15 @@ class Footer extends Component {
                         <div class="col-12 col-sm-4 col-md-3">
                             <h6 class="footer__title">Contact</h6>
                             <ul class="footer__list">
-                                <li><a href="tel:+18002345678">+1 800 234-5678</a></li>
-                                <li><a href="mailto:support@moviego.com">support@flixgo.com</a></li>
+                                <li><a href="tel:+18002345678">+962 79 510 2339</a></li>
+                                <li><a href="mailto:support@moviego.com">support@flixgo.jo</a></li>
                             </ul>
-                            <ul class="footer__social">
-                                <li class="facebook"><i class="icon ion-logo-facebook"></i></li>
-                                <li class="instagram"><i class="icon ion-logo-instagram"></i></li>
-                                <li class="twitter"><i class="icon ion-logo-twitter"></i></li>
-                                <li class="vk"><i class="icon ion-logo-vk"></i></li>
-                            </ul>
+                           
                         </div>
                  
                         <div class="col-12">
                             <div class="footer__copyright">
-                                <small>© 2020 FlixGo. Create by <a href="https://themeforest.net/user/dmitryvolkov/portfolio" target="_blank">Dmitry Volkov</a></small>
+                                <small>© 2020 FlixGo. Team</small>
         
                                 <ul>
                                     <li><a href="privacy.html">Terms of Use</a></li>

@@ -6,7 +6,7 @@ import Error from "../Error";
 import Spinner from "../Spinner";
 import { db } from '../userAuthorization/firebase'
 import { collection, addDoc, Timestamp, query, onSnapshot, where, getDocs, orderBy } from 'firebase/firestore'
-import Weather from "../weather/Weather";
+import Weather from '../weather/weather'
 
 export default class UserProfile extends Component {
   state = {

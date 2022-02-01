@@ -55,12 +55,12 @@ export default function  Navbar(props){
                         Register
                       </Link>
                     </li>
-                    <li className="header__nav-item">
+                    {/* <li className="header__nav-item">
                       <Link className="header__nav-link" to="login">
                         Login
                       </Link>
-                    </li>
-                    </>:<Link className="header__nav-link" to="profile">{ props.username} Profile</Link>
+                    </li> */}
+                    </>:<Link className="header__nav-link" to="profile"> Profile</Link>
                     }
                   </ul>
                             

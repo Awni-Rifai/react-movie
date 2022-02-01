@@ -11,7 +11,9 @@ export default function Related_movie ()  {
     let movie=""
 
   
-    const API_KEY = '9b630d54f9503a9613dd2019e5cc7417';
+    // const API_KEY = '9b630d54f9503a9613dd2019e5cc7417';
+    const API_KEY = '402e0af2e437f8ce5df84281a5bc7b78';
+
     if (id) {
         movie="/movie/"
          url =`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
@@ -20,8 +22,9 @@ export default function Related_movie ()  {
       url =`https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}`
     }
     const fetchMovie = useCallback(async () => {
+        
         const { data } = await axios.get(url)
-        console.log('data', data);
+        
         
        
         // const json = await response.json()

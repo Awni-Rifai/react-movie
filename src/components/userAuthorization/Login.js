@@ -85,7 +85,14 @@ export default class Login extends Component {
       const user=await this.SingninUser(this.state.email,this.state.password);
       if(!user)return 
       this.setState({error:{body:"",email:"",password:""}});
-      this.props.navigate('/');
+      
+      // if(localStorage.getItem('checkout')){
+      //   localStorage.removeItem('checkout');
+      //   this.props.navigate(-1)
+      // }
+      // else{
+      //   this.props.navigate('/');
+      // }
 
      
    

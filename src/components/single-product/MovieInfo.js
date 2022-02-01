@@ -178,7 +178,7 @@ function MovieInfo(props) {
                   </ul>
                 </div>
 
-                <div className="details__share">
+                {/* <div className="details__share">
                   <span className="details__share-title">
                     Share with friends:
                   </span>
@@ -205,7 +205,7 @@ function MovieInfo(props) {
                       </a>
                     </li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

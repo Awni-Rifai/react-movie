@@ -6,7 +6,7 @@ const options={
     autoplay: true,
     autoplayTimeout: 2000,
     navText: ["Prev", "Next"],
-    smartSpeed: 500,
+    smartSpeed: 3000,
     responsive: {
         0: {
             items: 1,

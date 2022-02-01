@@ -3,14 +3,16 @@ import Spinner from "./Spinner";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-export default function Successful() {
+export default function Successful(props) {
     const navigate=useNavigate();
-    const TIME_TO_REDIRECT=10 //in seconds
+    const TIME_TO_REDIRECT=6 //in seconds
     const moveToHome=()=>{
         navigate('/')
     }
     useEffect(()=>{
-        setInterval(moveToHome,TIME_TO_REDIRECT*1000)
+        const intervalId=setInterval(moveToHome,TIME_TO_REDIRECT*1000);
+        localStorage.setItem('intervalId',intervalId);
+        
     })
  
   return (
@@ -36,7 +38,7 @@ export default function Successful() {
                     color:'grey',
                     fontSize:'1.5rem'
                 }}
-                >You can see your order in you email</span>
+                >You can see your order in your email</span>
                 <span
                 style={{
                     display:'block',

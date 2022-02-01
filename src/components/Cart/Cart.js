@@ -101,7 +101,7 @@ class Cart extends Component {
                 <span className="col-4">{cart.name ||cart.title}</span>
 
                 <span className="col-4">
-                  {cart.price}
+                  {cart.price}$
                 </span>
                 <span className="col-4">
                   <button

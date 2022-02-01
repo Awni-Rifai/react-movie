@@ -13,7 +13,7 @@ import { getAuth } from "firebase/auth";
 import Spinner from "./Spinner";
 import './Carousel.css'
 
-// console.log = console.warn = console.error = () => {};
+
 
 export default class Home extends Component {
  
@@ -27,6 +27,10 @@ export default class Home extends Component {
     window.scrollTo(0,0);
     const auth=getAuth();
     const user = auth.currentUser;
+    if(localStorage.getItem('intervalId')){
+      clearInterval(localStorage.getItem('intervalId'));
+      localStorage.removeItem('intervalId');
+    }
    
 
 

@@ -142,30 +142,30 @@ $(document).ready(function () {
 	/*==============================
 	Scroll bar
 	==============================*/
-	$('.scrollbar-dropdown').mCustomScrollbar({
-		axis: "y",
-		scrollbarPosition: "outside",
-		theme: "custom-bar"
-	});
+	// $('.scrollbar-dropdown').mCustomScrollbar({
+	// 	axis: "y",
+	// 	scrollbarPosition: "outside",
+	// 	theme: "custom-bar"
+	// });
 
-	$('.accordion').mCustomScrollbar({
-		axis: "y",
-		scrollbarPosition: "outside",
-		theme: "custom-bar2"
-	});
+	// $('.accordion').mCustomScrollbar({
+	// 	axis: "y",
+	// 	scrollbarPosition: "outside",
+	// 	theme: "custom-bar2"
+	// });
 
 	/*==============================
 	Morelines
 	==============================*/
-	$('.card__description--details').moreLines({
-		linecount: 6,
-		baseclass: 'b-description',
-		basejsclass: 'js-description',
-		classspecific: '_readmore',
-		buttontxtmore: "",
-		buttontxtless: "",
-		animationspeed: 400
-	});
+	// $('.card__description--details').moreLines({
+	// 	linecount: 6,
+	// 	baseclass: 'b-description',
+	// 	basejsclass: 'js-description',
+	// 	classspecific: '_readmore',
+	// 	buttontxtmore: "",
+	// 	buttontxtless: "",
+	// 	animationspeed: 400
+	// });
 
 	/*==============================
 	Gallery
