@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.4fc4532b.css",
-    "main.js": "/static/js/main.2dca3647.js",
-    "static/media/fontawesome-webfont.svg?v=4.7.0": "/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
-    "static/media/fontawesome-webfont.eot": "/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
-    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
-    "static/media/section.jpg": "/static/media/section.fd4659273c0ebdeb9836.jpg",
-    "static/media/fontawesome-webfont.woff?v=4.7.0": "/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
-    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
-    "index.html": "/index.html",
-    "main.4fc4532b.css.map": "/static/css/main.4fc4532b.css.map",
-    "main.2dca3647.js.map": "/static/js/main.2dca3647.js.map"
+    "main.css": "/react-movie/static/css/main.7178a3f1.css",
+    "main.js": "/react-movie/static/js/main.98a76ea7.js",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/react-movie/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/fontawesome-webfont.eot": "/react-movie/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/react-movie/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/section.jpg": "/react-movie/static/media/section.fd4659273c0ebdeb9836.jpg",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/react-movie/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/react-movie/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "index.html": "/react-movie/index.html",
+    "main.7178a3f1.css.map": "/react-movie/static/css/main.7178a3f1.css.map",
+    "main.98a76ea7.js.map": "/react-movie/static/js/main.98a76ea7.js.map"
   },
   "entrypoints": [
-    "static/css/main.4fc4532b.css",
-    "static/js/main.2dca3647.js"
+    "static/css/main.7178a3f1.css",
+    "static/js/main.98a76ea7.js"
   ]
 }
