@@ -4,7 +4,7 @@ import Navbar from "../Navbar";
 import Footer from "../Footer";
 import MovieInfo from "../single-product/MovieInfo";
 import { Link } from "react-router-dom";
-
+import './cart.css'
 class Cart extends Component {
     
   state = {
@@ -75,13 +75,13 @@ class Cart extends Component {
       <div>
         <BreadCrump />
 
-        <div class="col-12 col-md-6 col-lg-12">
+        <div className="cart col-12 col-md-12 col-lg-12">
         {this.state.emptyCart ? (
               <h4 style={{color: 'white', textAlign: 'center' , fontSize:'2.8rem',padding:'4rem 0rem', marginTop:'20px'}} className="col-lg-12">The cart is empty</h4>
             ) : (
               ""
             )}
-        {!this.state.emptyCart && <div class="price">
+        {!this.state.emptyCart && <div class="price col-md-12">
             <div class="price__item price__item--first">
               <span>Cart</span>
               <span>
@@ -101,7 +101,7 @@ class Cart extends Component {
                 <span className="col-4">{cart.name ||cart.title}</span>
 
                 <span className="col-4">
-                  {cart.price}${/* {this.allPrices()}     */}
+                  {cart.price}
                 </span>
                 <span className="col-4">
                   <button
