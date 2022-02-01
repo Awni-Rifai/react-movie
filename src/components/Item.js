@@ -135,7 +135,7 @@ function Products() {
                 </div>
               ))}
 
-            <div className="col-12">
+            {/* <div className="col-12">
               <ul className=" paginator paginator--list">
                 <li className="paginator__item paginator__item--prev">
                   <Link to="#">
@@ -160,7 +160,7 @@ function Products() {
                   </Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
 
             <div className="col-12 col-sm-8 col-lg-12">
               <div className="card card--list">

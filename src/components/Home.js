@@ -24,10 +24,6 @@ export default class Home extends Component {
  
   };
   componentDidMount(){
-    console.log('component did mount');
-    console.log(this.props.popularMovies);
-    console.log(this.state.CarouselMovies);
- 
     window.scrollTo(0,0);
     const auth=getAuth();
     const user = auth.currentUser;
