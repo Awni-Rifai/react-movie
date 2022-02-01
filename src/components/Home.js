@@ -105,7 +105,7 @@ export default class Home extends Component {
                     key={Math.random()}
                     id={movie.id}
                     title={movie.name}
-                    image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    image={"https://i.ibb.co/nf0KXvh/peacemaker-ver5-xlg.jpg"}
                     category={movie.origin_country}
                     rating={movie.vote_average}
                     desc={movie.overview}
