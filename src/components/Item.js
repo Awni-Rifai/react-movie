@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import axios from "axios";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -11,12 +11,20 @@ function Products() {
   const [loading,setLoading]=useState(false);
   const [url, setUrl] = useState([
     "https://api.themoviedb.org/3/discover/movie/?api_key=9606e1ee79f0790f74055bff62a6f113&page=1",
-  ]);
+  ]); 
   const fetchProducts = useCallback(async () => {
-    setLoading(true)
-    const { data } = await axios.get(url);
-    setProducts(data.results);
-    setLoading(false)
+    try{
+      setLoading(true)
+      const { data } = await axios.get(url);
+      setProducts(data.results);
+      setLoading(false)
+
+    }
+    catch(err){
+      console.log(err);
+    }
+    
+  
   }, [url]);
  
 
@@ -58,7 +66,7 @@ function Products() {
 
 						
 						<ul class="breadcrumb">
-							<li class="breadcrumb__item"><Link to= "/">Home</Link></li>
+							<li class="breadcrumb__item"><Link to= "/react-movie">Home</Link></li>
 							<li class="breadcrumb__item breadcrumb__item--active">Store</li>
 						</ul>
 						
@@ -97,7 +105,7 @@ function Products() {
                             src={`https://image.tmdb.org/t/p/w500${product.poster_path}`}
                             alt=""
                           />
-                          <Link to={`/movie/${product.id}`} className="card__play">
+                          <Link to={`../react-movie/movie/${product.id}`} className="card__play">
                             <i className="icon ion-ios-play"></i>
                           </Link>
                         </div>
@@ -106,11 +114,11 @@ function Products() {
                       <div className="col-12 col-sm-8">
                         <div className="card__content">
                           <h3 className="card__title">
-                            <Link to={`/movie/${product.id}`}>{product.original_title}</Link>
+                            <Link to={`react-movie/movie/${product.id}`}>{product.original_title}</Link>
                           </h3>
                           <span className="card__category">
-                            <Link to="#">Action</Link>
-                            <Link to="#">Triler</Link>
+                            <Link to="#react-movie">Action</Link>
+                            <Link to="#react-movie">Triler</Link>
                           </span>
 
                           <div className="card__wrap">
@@ -138,24 +146,24 @@ function Products() {
             {/* <div className="col-12">
               <ul className=" paginator paginator--list">
                 <li className="paginator__item paginator__item--prev">
-                  <Link to="#">
+                  <Link to="#react-movie">
                     <i class="icon ion-ios-arrow-back"></i>
                   </Link>
                 </li>
                 <li className="paginator__item paginator__item--active">
-                  <Link to="">1</Link>
+                  <Link to=""react-movie>1</Link>
                 </li>
                 <li className="paginator__item ">
-                  <Link to="">2</Link>
+                  <Link to=""react-movie>2</Link>
                 </li>
                 <li className="paginator__item">
-                  <Link to="#">3</Link>
+                  <Link to="#react-movie">3</Link>
                 </li>
                 <li className="paginator__item">
-                  <Link to="#">4</Link>
+                  <Link to="#react-movie">4</Link>
                 </li>
                 <li className="paginator__item paginator__item--next">
-                  <Link to="#">
+                  <Link to="#react-movie">
                     <i className="icon ion-ios-arrow-forward"></i>
                   </Link>
                 </li>
@@ -184,17 +192,17 @@ function Products() {
                                     src={`https://image.tmdb.org/t/p/w500${tv.poster_path}`}
                                     alt=""
                                   />
-                                  <Link to={`/TV/${tv.id}`} className="card__play">
+                                  <Link to={`react-movie/TV/${tv.id}`} className="card__play">
                                     <i className="icon ion-ios-play"></i>
                                   </Link>
                                 </div>
                                 <div className="card__content">
                                   <h3 className="card__title">
-                                    <Link to="#">{tv.original_title}</Link>
+                                    <Link to="#react-movie">{tv.original_title}</Link>
                                   </h3>
                                   <span className="card__category">
-                                    <Link to="#">Action</Link>
-                                    <Link to="#">Triler</Link>
+                                    <Link to="#react-movie">Action</Link>
+                                    <Link to="#react-movie">Triler</Link>
                                   </span>
                                   <span className="card__rate">
                                     <i className="icon ion-ios-star"></i>

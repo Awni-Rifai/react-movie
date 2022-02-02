@@ -34,24 +34,24 @@ export default function  Navbar(props){
             <div className="row"> 
               <div className="col-12">
                 <div className="header__content">
-                  <Link className="header__nav-link" to="/">
+                  <Link className="header__nav-link" to="/react-movie">
                     {" "}
                     <img src="img/logo.svg" alt="" />
                   </Link>
 
                   <ul className="header__nav">
                     <li className="header__nav-item">
-                      <Link className="header__nav-link" to="/">
+                      <Link className="header__nav-link" to="/react-movie">
                         Home
                       </Link>
                     </li>
                     <li className="header__nav-item">
-                      <Link className="header__nav-link" to="/store">
+                      <Link className="header__nav-link" to="/react-movie/store">
                         store
                       </Link>
                     </li>
                   {!props.auth? <> <li className="header__nav-item">
-                      <Link className="header__nav-link" to="register">
+                      <Link className="header__nav-link" to="/react-movie/register">
                         Register
                       </Link>
                     </li>
@@ -60,7 +60,7 @@ export default function  Navbar(props){
                         Login
                       </Link>
                     </li> */}
-                    </>:<Link className="header__nav-link" to="profile"> Profile</Link>
+                    </>:<Link className="header__nav-link" to="/react-movie/profile"> Profile</Link>
                     }
                   </ul>
                             
@@ -109,7 +109,7 @@ export default function  Navbar(props){
                        <span  style={{cursor:'pointer'}}  className="header__sign-in">
                        <i className="icon ion-ios-log-in"></i>
                       
-                      <Link  to="login"> <span>Login</span></Link>
+                      <Link  to="/react-movie/login"> <span>Login</span></Link>
                       </span>
                     
                    
@@ -118,7 +118,7 @@ export default function  Navbar(props){
                   </div>
                       <div className="header__cart">
                       <button className="header__cart-btn" type="">
-                      <Link to='/cart' className="ion-ios-cart"><i></i></Link>
+                      <Link to='/react-movie/cart' className="ion-ios-cart"><i></i></Link>
                     </button>
                     <span className="cartNum">{props.cartCount}</span>
                             </div>  

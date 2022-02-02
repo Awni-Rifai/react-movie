@@ -123,7 +123,7 @@ export default class App extends Component {
   // this.fetchMovies();
 
   render() {
-    // console.log = console.warn = console.error = () => {};
+    
     return (
       <div className="App">
         <Navbar
@@ -132,22 +132,22 @@ export default class App extends Component {
           cartCount={this.state.cartCount}
         />
         <Routes>
-          <Route exact path="/login" element={<WrappedLogin />} />
-          <Route exact path="/register" element={<WrappedRegister />} />
+          <Route exact path="react-movie/login" element={<WrappedLogin />} />
+          <Route exact path="react-movie/register" element={<WrappedRegister />} />
 
           <Route path="*" element={<NotFound />} />
 
-          <Route exact path="/store" element={<Item />} />
-          <Route exact path="/checkOut" element={<ContactInfoWrapper/>} />
+          <Route exact path="react-movie/store" element={<Item />} />
+          <Route exact path="react-movie/checkOut" element={<ContactInfoWrapper/>} />
           <Route
             exact
-            path="/movie"
+            path="react-movie/movie"
             element={<SingleProduct addElementToCart={this.addElementToCart} />}
           />
-          <Route exact path="/cart" element={<Cart deleteElement={this.deleteElement} />} />
+          <Route exact path="react-movie/cart" element={<Cart deleteElement={this.deleteElement} />} />
           <Route
             exact
-            path="/"
+            path="react-movie/"
             element={
               <Home
                 filteredMovies={this.state.filteredMovies}
@@ -156,14 +156,14 @@ export default class App extends Component {
               />
             }
           />
-          <Route path="/profile" element={<ProfileWrapper />}></Route>
-          <Route path="/successful" element={<Successful  />}></Route>
+          <Route path="react-movie/profile" element={<ProfileWrapper />}></Route>
+          <Route path="react-movie/successful" element={<Successful  />}></Route>
           <Route
-            path="/TV/:id"
+            path="react-movie/TV/:id"
             element={<SingleProduct addElementToCart={this.addElementToCart} />}
           />
           <Route
-            path="/movie/:movie_id"
+            path="react-movie/movie/:movie_id"
             element={<SingleProduct addElementToCart={this.addElementToCart} />}
           />
         </Routes>
