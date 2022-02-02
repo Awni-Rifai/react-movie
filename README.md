@@ -4,17 +4,17 @@
 * [Setup](#setup)
 
 
-##FlixGo
+## FlixGo
 
 FlixGo is movies booking website which offer all movies that are in cinemas, So users can book any movie and get it as soft copy by email.
 
-##Technologies
+## Technologies
 Project is created with:
-*React
-*HTML
-*CSS.
-*Bootstrap
-*FireBase
+* React
+* HTML
+* CSS.
+* Bootstrap
+* FireBase
 
 
 ##Setup
