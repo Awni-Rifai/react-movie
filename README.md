@@ -1,3 +1,8 @@
+##images
+
+![alt text](https://github.com/Awni-Rifai/Portfolio/blob/main/images/iMac%20iPad%20and%20iPhone.jpg?raw=true)
+
+
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
