@@ -1,8 +1,10 @@
 ## Images 
+<p float="left">
 <img src="https://github.com/Awni-Rifai/Portfolio/blob/main/images/iMac%20iPad%20and%20iPhone.jpg " width=50% height=50%>
+<img src="https://github.com/Awni-Rifai/Portfolio/blob/main/images/IMG_2442%20movie%20poster%20mockup.jpg" width=40% height=40%>
+  </div>
 
 
-![alt text](https://github.com/Awni-Rifai/Portfolio/blob/main/images/IMG_2442%20movie%20poster%20mockup.jpg | width=100)
 
 
 ## Table of contents
