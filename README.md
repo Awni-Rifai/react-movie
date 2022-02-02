@@ -1,5 +1,7 @@
 ## Images 
-![alt text](https://github.com/Awni-Rifai/Portfolio/blob/main/images/iMac%20iPad%20and%20iPhone.jpg | width=100)
+<img src="https://github.com/Awni-Rifai/Portfolio/blob/main/images/iMac%20iPad%20and%20iPhone.jpg " width=50% height=50%>
+
+
 ![alt text](https://github.com/Awni-Rifai/Portfolio/blob/main/images/IMG_2442%20movie%20poster%20mockup.jpg | width=100)
 
 
