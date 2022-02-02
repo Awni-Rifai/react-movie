@@ -3,9 +3,10 @@
 * [Technologies](#technologies)
 * [Setup](#setup)
 
-React Movie app
-#FlixGo
-###FlixGo is movies booking website which offer all movies that are in cinemas, So users can book any movie and get it as soft copy by email.
+
+##FlixGo
+
+FlixGo is movies booking website which offer all movies that are in cinemas, So users can book any movie and get it as soft copy by email.
 
 ##Technologies
 Project is created with:
