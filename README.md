@@ -12,7 +12,7 @@ FlixGo is movies booking website which offer all movies that are in cinemas, So 
 Project is created with:
 *React
 *HTML
-*CSS
+*CSS.
 *Bootstrap
 *FireBase
 
